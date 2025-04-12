@@ -2,6 +2,7 @@ package com.example.labyrinthe
 import java.io.File
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
+import android.content.Context
 
 /**
  * Defines different types of tiles on the map (used for (un)serialization of the map).
@@ -13,7 +14,11 @@ enum class TileType { WALL, DOOR, PLAYER, MOB, BOSS }
  * Defines the tile on the map (used for (un)serialization of the map).
  */
 @Serializable
-data class MapCase(val x: Int, val y: Int, val type: TileType)
+data class MapCase(
+    val x: Int,
+    val y: Int,
+    val type: TileType
+)
 
 /**
  * Base structure in which a map is (un)serialized.
@@ -25,9 +30,17 @@ data class MapData(
     val cases: List<MapCase>
 )
 
-class Map(val filePath: String) {
+class Map(private val context: Context, val fileNameInAssets: String) {
     val maxSize: Vector2D //Maximum size of the map (will be initialized in the init block)
     val objectsOnTheMap = mutableListOf<GameObject>() //Only Entity or Wall : they are drawable and have a position.
+
+    /**
+     * Read a file from the assets/ folder.
+     */
+    fun loadLevelFromAssets(context: Context, filename: String): String {
+        val inputStream = context.assets.open(filename)
+        return inputStream.bufferedReader().use { it.readText() }
+    }
 
     /**
      * Builds the map from the input file filePath.
@@ -35,7 +48,8 @@ class Map(val filePath: String) {
      */
     init {
         //1) Parse the map file
-        val jsonString = File(filePath).readText()
+        //val jsonString = File(filePath).readText()
+        val jsonString = loadLevelFromAssets(context, fileNameInAssets)
         val mapData: MapData = Json.decodeFromString<MapData>(jsonString)
 
         //2) Retrieve the map size. The empty cases are simply not represented for performance purposes.
