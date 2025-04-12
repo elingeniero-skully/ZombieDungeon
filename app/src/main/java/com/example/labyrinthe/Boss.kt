@@ -1,5 +1,5 @@
 package com.example.labyrinthe
 
-class Boss: Mob() {
+class Boss(position: Vector2D): Mob(position) {
 
 }

@@ -7,7 +7,7 @@ import kotlinx.serialization.json.Json
  * Defines different types of tiles on the map (used for (un)serialization of the map).
  */
 @Serializable
-enum class TileType { WALL, PLAYER, MOB }
+enum class TileType { WALL, DOOR, PLAYER, MOB, BOSS }
 
 /**
  * Defines the tile on the map (used for (un)serialization of the map).
@@ -34,8 +34,6 @@ class Map(val filePath: String) {
      * For now, errors are not handled.
      */
     init {
-        //Don't forget to include serialization lib dependency and do the import
-
         //1) Parse the map file
         val jsonString = File(filePath).readText()
         val mapData: MapData = Json.decodeFromString<MapData>(jsonString)
@@ -47,7 +45,9 @@ class Map(val filePath: String) {
         for (case in mapData.cases) {
             when (case.type) {
                 TileType.WALL   -> objectsOnTheMap.add(Wall(Vector2D(case.x, case.y)))
+                TileType.DOOR   -> objectsOnTheMap.add(Door(Vector2D(case.x, case.y)))
                 TileType.MOB    -> objectsOnTheMap.add(Mob(Vector2D(case.x, case.y)))
+                TileType.BOSS   -> objectsOnTheMap.add(Boss(Vector2D(case.x, case.y)))
                 TileType.PLAYER -> objectsOnTheMap.add(Player(Vector2D(case.x, case.y)))
             }
         }

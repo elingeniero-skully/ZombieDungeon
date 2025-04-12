@@ -1,6 +1,6 @@
 package com.example.labyrinthe
 
-open class Mob(val positionArg: Vector2D): Entity() {
+open class Mob(positionArg: Vector2D): Entity() {
 
     override var position = positionArg
 
