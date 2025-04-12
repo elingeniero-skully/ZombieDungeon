@@ -1,9 +1,15 @@
 package com.example.labyrinthe
 
-class Map {
-    //Maximum size of the map
-    val maxSize = Vector2D(255,255)
+class Map(val filePath: String) {
+    var maxSize: Vector2D = Vector2D(255,255) //Maximum size of the map (can be updated in the init block)
     val objectsOnTheMap = mutableListOf<GameObject>()
+
+    /**
+     * Builds the map from the input file filePath.
+     */
+    init {
+        TODO("Implement how the map is loaded from a file.")
+    }
 
     /**
      * Returns the object that has a certain position on the map.
