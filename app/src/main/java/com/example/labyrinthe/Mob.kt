@@ -1,6 +1,8 @@
 package com.example.labyrinthe
 
-open class Mob: Entity() {
+open class Mob(val positionArg: Vector2D): Entity() {
+
+    override var position = positionArg
 
     /**
      * IMPLEMENTATION OF THE STRATEGY PATTERN

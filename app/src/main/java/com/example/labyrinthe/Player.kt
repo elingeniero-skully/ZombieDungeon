@@ -1,5 +1,5 @@
 package com.example.labyrinthe
 
-class Player: Entity(), UseKey {
-
+class Player(val positionArg: Vector2D): Entity(), UseKey {
+    override var position = positionArg
 }
