@@ -17,7 +17,8 @@ enum class TileType { WALL, DOOR, PLAYER, MOB, BOSS }
 data class MapCase(
     val x: Int,
     val y: Int,
-    val type: TileType
+    val type: TileType,
+    val args: List<String> //Arguments to pass to the constructor.
 )
 
 /**
@@ -58,11 +59,49 @@ class Map(private val context: Context, val fileNameInAssets: String) {
         //3) Unpack into objectsOnTheMap
         for (case in mapData.cases) {
             when (case.type) {
-                TileType.WALL   -> objectsOnTheMap.add(Wall(Vector2D(case.x, case.y)))
-                TileType.DOOR   -> objectsOnTheMap.add(Door(Vector2D(case.x, case.y)))
-                TileType.MOB    -> objectsOnTheMap.add(Mob(Vector2D(case.x, case.y)))
-                TileType.BOSS   -> objectsOnTheMap.add(Boss(Vector2D(case.x, case.y)))
-                TileType.PLAYER -> objectsOnTheMap.add(Player(Vector2D(case.x, case.y)))
+                TileType.WALL   -> {
+                    //CONSTRUCTOR : Wall(positionArg: Vector2D)
+                    objectsOnTheMap.add(Wall(Vector2D(case.x, case.y)))
+                }
+                TileType.DOOR   -> {
+                    //CONSTRUCTOR : Door(position: Vector2D)
+                    objectsOnTheMap.add(Door(Vector2D(case.x, case.y)))
+                }
+                TileType.MOB    -> {
+                    //CONSTRUCTOR : Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomMovementPattern())
+                    val position: Vector2D = Vector2D(case.x, case.y)
+                    var movementPattern: Mob.MovementPattern = Mob.RandomMovementPattern()
+
+                    //Converts the String argument into a movementPattern. Must be explained thoroughly in the docs.
+                    //args[0] = first constructor argument; args[n] = n-1 constructor argument.
+                    //This way of coding is not very modular but it works.
+                    when (case.args[0]) {
+                        "random"   -> movementPattern = Mob.RandomMovementPattern()
+                        "follow"   -> movementPattern = Mob.FollowPlayerPattern()
+                        "line"     -> movementPattern = Mob.LineMovementPattern()
+                        "circular" -> movementPattern = Mob.CircularMovementPattern()
+                    }
+                    objectsOnTheMap.add(Mob(position, movementPattern))
+                }
+                TileType.BOSS    -> {
+                    //CONSTRUCTOR : BOSS(positionArg: Vector2D, movementPattern: MovementPattern = RandomMovementPattern())
+                    val position: Vector2D = Vector2D(case.x, case.y)
+                    var movementPattern: Mob.MovementPattern = Mob.RandomMovementPattern()
+
+                    //Converts the String argument into a movementPattern. Must be explained thoroughly in the docs.
+                    //args[0] = first constructor argument; args[n] = n-1 constructor argument.
+                    //This way of coding is not very modular but it works.
+                    when (case.args[0]) {
+                        "random"   -> movementPattern = Mob.RandomMovementPattern()
+                        "follow"   -> movementPattern = Mob.FollowPlayerPattern()
+                        "line"     -> movementPattern = Mob.LineMovementPattern()
+                        "circular" -> movementPattern = Mob.CircularMovementPattern()
+                    }
+                    objectsOnTheMap.add(Boss(position, movementPattern))
+                }
+                TileType.PLAYER -> {
+                    objectsOnTheMap.add(Player(Vector2D(case.x, case.y)))
+                }
             }
         }
     }

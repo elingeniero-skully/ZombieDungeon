@@ -1,7 +1,9 @@
 package com.example.labyrinthe
 
-open class Mob(positionArg: Vector2D): Entity() {
-
+/**
+ * @param movementPattern Movement algorithm the Mob will use (default is RandomMovementPattern).
+ */
+open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomMovementPattern()): Entity() {
     override var position = positionArg
 
     /**
