@@ -1,18 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Map / Game View (3/4 of screen) -->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Controls / Stats (1/4 of screen) -->
+    <FrameLayout
+        android:id="@+id/gameMapContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="#242282" />
+
+    <LinearLayout
+        android:id="@+id/controlPanel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#333333"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <!-- LEFT: D-Pad -->
+
+        <LinearLayout
+            android:id="@+id/movementPad"
+            android:layout_width="146dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="start|center_vertical"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="71dp"
+                    android:layout_height="15dp" />
+
+                <Button
+                    android:id="@+id/btnUp"
+                    android:layout_width="64dp"
+                    android:layout_height="match_parent"
+                    android:text="↑"
+                    app:icon="@android:drawable/arrow_up_float" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnLeft"
+                    android:layout_width="66dp"
+                    android:layout_height="match_parent"
+                    android:text="↺"
+                    app:icon="@drawable/mirrored_image" />
+
+                <Space
+                    android:layout_width="73dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btnRight"
+                    android:layout_width="65dp"
+                    android:layout_height="58dp"
+                    android:text="↻"
+                    app:icon="@drawable/_ceff62b8a2aa86342062ae04c4be6b4" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="72dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btnDown"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:text="↓"
+                    app:icon="@android:drawable/arrow_down_float" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- MIDDLE: Stats -->
+
+        <!-- RIGHT: Action Buttons -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvHealth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HP: 100"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvAmmo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ammo: 15"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/actionPanel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="end|center_vertical"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnShoot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shoot" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="16dp" />
+
+            <Button
+                android:id="@+id/btnInventory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inventory" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
