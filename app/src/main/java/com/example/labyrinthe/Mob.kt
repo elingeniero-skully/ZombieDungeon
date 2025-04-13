@@ -7,6 +7,8 @@ import kotlinx.serialization.json.decodeFromJsonElement
 /**
  * @param movementPattern Movement algorithm the Mob will use (default is RandomMovementPattern).
  */
+
+//TODO Include item in the constructor AND IN THE MOB STRUCTURE PROPERLY !!
 open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomMovementPattern()): Entity() {
     override var position = positionArg
 
@@ -23,7 +25,7 @@ open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomM
      */
     class RandomMovementPattern : MovementPattern {
         override fun move() {
-
+            TODO("Not yet implemented")
         }
     }
 
@@ -42,7 +44,7 @@ open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomM
      */
     class CircularMovementPattern : MovementPattern {
         override fun move() {
-
+            TODO("Not yet implemented")
         }
     }
 
@@ -51,7 +53,7 @@ open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomM
      */
     class LineMovementPattern : MovementPattern {
         override fun move() {
-
+            TODO("Not yet implemented")
         }
     }
 }

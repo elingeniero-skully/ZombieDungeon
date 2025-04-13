@@ -43,14 +43,6 @@ class Map(private val context: Context, val fileNameInAssets: String) {
     val objectsOnTheMap = mutableListOf<GameObject>() //Only Entity or Wall : they are drawable and have a position.
 
     /**
-     * Read a file from the assets/ folder.
-     */
-    fun loadLevelFromAssets(context: Context, filename: String): String {
-        val inputStream = context.assets.open(filename)
-        return inputStream.bufferedReader().use { it.readText() }
-    }
-
-    /**
      * Builds the map from the input file filePath.
      * For now, errors are not handled.
      */
@@ -68,6 +60,14 @@ class Map(private val context: Context, val fileNameInAssets: String) {
             val parser = JsonParserFactory.getParser(case.type)
             objectsOnTheMap.add(parser.parse(case) as GameObject) //Polymorphism in action !
         }
+    }
+
+    /**
+     * Read a file from the assets/ folder.
+     */
+    fun loadLevelFromAssets(context: Context, filename: String): String {
+        val inputStream = context.assets.open(filename)
+        return inputStream.bufferedReader().use { it.readText() }
     }
 
     /**
