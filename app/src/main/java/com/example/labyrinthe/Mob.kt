@@ -1,7 +1,15 @@
 package com.example.labyrinthe
 
-open class Mob(positionArg: Vector2D): Entity() {
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromJsonElement
 
+/**
+ * @param movementPattern Movement algorithm the Mob will use (default is RandomMovementPattern).
+ */
+
+//TODO Include item in the constructor AND IN THE MOB STRUCTURE PROPERLY !!
+open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomMovementPattern()): Entity() {
     override var position = positionArg
 
     /**
@@ -17,7 +25,7 @@ open class Mob(positionArg: Vector2D): Entity() {
      */
     class RandomMovementPattern : MovementPattern {
         override fun move() {
-
+            TODO("Not yet implemented")
         }
     }
 
@@ -36,7 +44,7 @@ open class Mob(positionArg: Vector2D): Entity() {
      */
     class CircularMovementPattern : MovementPattern {
         override fun move() {
-
+            TODO("Not yet implemented")
         }
     }
 
@@ -45,7 +53,37 @@ open class Mob(positionArg: Vector2D): Entity() {
      */
     class LineMovementPattern : MovementPattern {
         override fun move() {
-
+            TODO("Not yet implemented")
         }
+    }
+}
+
+/**
+ * Data structure that represents a serialized version of the object.
+ * Used by the JsonParser.
+ */
+@Serializable
+data class MobStructure(
+    val x: Int,
+    val y: Int,
+    val movementPattern: String
+)
+
+/**
+ * Parser of the class.
+ */
+class MobJsonParser() : JsonParser() {
+    override fun parse(mapCase: MapCase): Mob {
+        val structure = Json.decodeFromJsonElement<MobStructure>(mapCase.details)
+        var movementPattern: Mob.MovementPattern = Mob.RandomMovementPattern()
+
+        when (structure.movementPattern) {
+            "random"   -> movementPattern = Mob.RandomMovementPattern()
+            "follow"   -> movementPattern = Mob.FollowPlayerPattern()
+            "line"     -> movementPattern = Mob.LineMovementPattern()
+            "circular" -> movementPattern = Mob.CircularMovementPattern()
+        }
+
+        return Mob(Vector2D(structure.x, structure.y), movementPattern)
     }
 }
