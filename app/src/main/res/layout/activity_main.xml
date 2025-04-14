@@ -8,13 +8,15 @@
 
     <!-- Map / Game View (3/4 of screen) -->
 
-    <!-- Controls / Stats (1/4 of screen) -->
     <FrameLayout
         android:id="@+id/gameMapContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
         android:background="#242282" />
+
+
+    <!-- Controls / Stats (1/4 of screen) -->
 
     <LinearLayout
         android:id="@+id/controlPanel"
