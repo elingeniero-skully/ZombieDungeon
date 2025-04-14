@@ -98,7 +98,7 @@
 
         </LinearLayout>
 
-        <!-- MIDDLE: Stats -->
+
 
         <!-- RIGHT: Action Buttons -->
         <LinearLayout
@@ -107,6 +107,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
+
+            <!-- MIDDLE: Stats -->
 
             <TextView
                 android:id="@+id/tvHealth"
