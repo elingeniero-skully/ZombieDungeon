@@ -40,9 +40,3 @@ class Game(private val context: Context) : GameEventListener {
         currentLevel = Level(context, levelFilePaths[0])
     }
 }
-
-/**
- * Events related to the Game class
- */
-class LevelSucceedEvent() : GameEvent()
-class LevelFailedEvent() : GameEvent()

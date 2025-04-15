@@ -7,39 +7,6 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 
-/**
- * Defines different types of tiles on the map (used for (un)serialization of the map).
- * Used by the JsonParserFactory object
- * Has the benefit of forcing the JsonParserFactory to implement each case.
- */
-@Serializable
-enum class TileType { WALL, DOOR, PLAYER, MOB, BOSS }
-
-/**
- * Generic class that contains raw information that must be parsed by the appropriate parser.
- */
-
-/**
- * Defines the tile on the map (used for (un)serialization of the map).
- */
-@Serializable
-data class MapCase(
-    val x: Int,
-    val y: Int,
-    val type: TileType,
-    val details: JsonElement
-)
-
-/**
- * Base structure in which a map is (un)serialized.
- */
-@Serializable
-data class MapData(
-    val width: Int,
-    val height: Int,
-    val cases: List<MapCase>
-)
-
 class Map(private val context: Context, val fileNameInAssets: String) {
     val maxSize: Vector2D //Maximum size of the map (will be initialized in the init block)
     val objectsOnTheMap = mutableListOf<GameObject>() //Only Entity or Wall : they are drawable and have a position.
