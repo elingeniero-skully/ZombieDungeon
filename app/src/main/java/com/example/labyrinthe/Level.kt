@@ -2,11 +2,15 @@ package com.example.labyrinthe
 
 import android.content.Context
 
-class Level(private val context: Context) {
+class Level(private val context: Context, val mapFilePath: String) {
     private var isRunning = false
-    private lateinit var map: Map
+    private val map: Map
     private val listeners = mutableListOf<GameEventListener>() //Objects that implement GameEventListener.
-    val queue = EventQueue()
+    private val queue = EventQueue()
+
+    init {
+        map = Map(context, mapFilePath)
+    }
 
     /**
      * Starts the current level loop. There is no need for real time as it is a simple 2D single-player game.
@@ -27,13 +31,6 @@ class Level(private val context: Context) {
     }
 
     /**
-     * Loads the map that resides in filepath
-     */
-    fun loadMap(filepath: String) {
-        map = Map(context, filepath)
-    }
-
-    /**
      * Allows external objets to register external events.
      */
     fun registerExternalEvent(event: GameEvent) {
@@ -42,7 +39,7 @@ class Level(private val context: Context) {
 
     /**
      * Allows external objets to register internal events. Internal events can only be added from the Listeners.
-     * More more information see the relevant sequence diagram describing in-game event handling.
+     * For more information see the relevant sequence diagram describing in-game event handling.
      */
     fun registerInternalEvent(event: GameEvent, caller: Any) {
         if (caller is GameEventListener) queue.enqueueInternal(event)
