@@ -9,7 +9,7 @@ import kotlinx.serialization.json.decodeFromJsonElement
  */
 
 //TODO Include item in the constructor AND IN THE MOB STRUCTURE PROPERLY !!
-open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomMovementPattern()): Entity() {
+open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomMovementPattern(), inventory: List<Item>?): Entity() {
     override var position = positionArg
 
     /**
@@ -63,7 +63,10 @@ open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomM
  * Used by the JsonParser.
  */
 @Serializable
-data class MobStructure(val movementPattern: String)
+data class MobStructure(
+    val movementPattern: String,
+    val weapons: List<WeaponStructure>
+)
 
 /**
  * Parser of the class.
@@ -72,6 +75,7 @@ class MobJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Mob {
         val structure = Json.decodeFromJsonElement<MobStructure>(mapCase.details)
         var movementPattern: Mob.MovementPattern = Mob.RandomMovementPattern()
+        val inventory = mutableListOf<Item>()
 
         when (structure.movementPattern) {
             "random"   -> movementPattern = Mob.RandomMovementPattern()
@@ -80,6 +84,14 @@ class MobJsonParser() : JsonParser() {
             "circular" -> movementPattern = Mob.CircularMovementPattern()
         }
 
-        return Mob(Vector2D(mapCase.x, mapCase.y), movementPattern)
+        //Adding weapons to the inventory
+        for (weapon in structure.weapons) {
+            when (weapon.type) {
+                WeaponType.GUN -> inventory.add(Gun(weapon.name, weapon.damage))
+                WeaponType.KNIFE -> inventory.add(Knife(weapon.name, weapon.damage))
+            }
+        }
+
+        return Mob(Vector2D(mapCase.x, mapCase.y), movementPattern, inventory)
     }
 }
