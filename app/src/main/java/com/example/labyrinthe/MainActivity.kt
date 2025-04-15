@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // Here you can initialize your game engine or elements
         // e.g. startGameLoop(), initPlayer(), etc.
-        //TODO : Start game
+
         val game = Game(this)
         game.start()
     }
