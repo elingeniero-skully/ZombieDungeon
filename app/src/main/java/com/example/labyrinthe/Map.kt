@@ -4,6 +4,8 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 import android.content.Context
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonNull
+import kotlinx.serialization.json.JsonObject
 
 /**
  * Defines different types of tiles on the map (used for (un)serialization of the map).
@@ -25,7 +27,7 @@ data class MapCase(
     val x: Int,
     val y: Int,
     val type: TileType,
-    val details: JsonElement //Arguments to pass to the constructor.
+    val details: JsonElement
 )
 
 /**

@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
 
-class Player(val positionArg: Vector2D): Entity(), UseKey, GameEventListener {
+class Player(positionArg: Vector2D, inventory: List<Item>?): Entity(), UseKey, GameEventListener {
     override var position = positionArg
 
     override fun onEvent(event: GameEvent, queue: EventQueue) {
@@ -21,7 +21,9 @@ class Player(val positionArg: Vector2D): Entity(), UseKey, GameEventListener {
  * Used by the JsonParser.
  */
 @Serializable
-class PlayerStructure()
+class PlayerStructure(
+    val weapons: List<WeaponStructure>
+)
 
 /**
  * Parser of the class.
@@ -29,7 +31,17 @@ class PlayerStructure()
 class PlayerJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Player {
         val structure = Json.decodeFromJsonElement<PlayerStructure>(mapCase.details)
-        return Player(Vector2D(mapCase.x, mapCase.y))
+        val inventory = mutableListOf<Item>()
+
+        //Adding weapons to the inventory
+        for (weapon in structure.weapons) {
+            when (weapon.type) {
+                WeaponType.GUN -> inventory.add(Gun(weapon.name, weapon.damage))
+                WeaponType.KNIFE -> inventory.add(Knife(weapon.name, weapon.damage))
+            }
+        }
+
+        return Player(Vector2D(mapCase.x, mapCase.y), inventory)
     }
 }
 
