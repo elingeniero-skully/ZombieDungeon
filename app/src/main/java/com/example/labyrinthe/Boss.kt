@@ -14,11 +14,7 @@ class Boss(position: Vector2D, movementPattern: MovementPattern = RandomMovement
  * Used by the JsonParser.
  */
 @Serializable
-data class BossStructure(
-    val x: Int,
-    val y: Int,
-    val movementPattern: String
-)
+data class BossStructure(val movementPattern: String)
 
 /**
  * Parser of the class.
@@ -35,6 +31,6 @@ class BossJsonParser() : JsonParser() {
             "circular" -> movementPattern = Mob.CircularMovementPattern()
         }
 
-        return Boss(Vector2D(structure.x, structure.y), movementPattern)
+        return Boss(Vector2D(mapCase.x, mapCase.y), movementPattern)
     }
 }

@@ -39,7 +39,6 @@ class Game(private val context: Context) : GameEventListener {
     fun start() {
         currentLevel = Level(context, levelFilePaths[0])
     }
-
 }
 
 /**

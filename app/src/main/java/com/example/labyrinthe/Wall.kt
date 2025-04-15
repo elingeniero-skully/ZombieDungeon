@@ -12,10 +12,7 @@ open class Wall(positionArg: Vector2D): GameObject(), Drawable {
  * Used by the JsonParser.
  */
 @Serializable
-data class WallStructure(
-    val x: Int,
-    val y: Int
-)
+class WallStructure()
 
 /**
  * Parser for the Wall class.
@@ -23,6 +20,6 @@ data class WallStructure(
 class WallJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Wall {
         val structure = Json.decodeFromJsonElement<WallStructure>(mapCase.details)
-        return Wall(Vector2D(structure.x, structure.y))
+        return Wall(Vector2D(mapCase.x, mapCase.y))
     }
 }

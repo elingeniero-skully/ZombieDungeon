@@ -63,11 +63,7 @@ open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomM
  * Used by the JsonParser.
  */
 @Serializable
-data class MobStructure(
-    val x: Int,
-    val y: Int,
-    val movementPattern: String
-)
+data class MobStructure(val movementPattern: String)
 
 /**
  * Parser of the class.
@@ -84,6 +80,6 @@ class MobJsonParser() : JsonParser() {
             "circular" -> movementPattern = Mob.CircularMovementPattern()
         }
 
-        return Mob(Vector2D(structure.x, structure.y), movementPattern)
+        return Mob(Vector2D(mapCase.x, mapCase.y), movementPattern)
     }
 }

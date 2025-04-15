@@ -21,10 +21,7 @@ class Player(val positionArg: Vector2D): Entity(), UseKey, GameEventListener {
  * Used by the JsonParser.
  */
 @Serializable
-data class PlayerStructure(
-    val x: Int,
-    val y: Int
-)
+class PlayerStructure()
 
 /**
  * Parser of the class.
@@ -32,7 +29,7 @@ data class PlayerStructure(
 class PlayerJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Player {
         val structure = Json.decodeFromJsonElement<PlayerStructure>(mapCase.details)
-        return Player(Vector2D(structure.x, structure.y))
+        return Player(Vector2D(mapCase.x, mapCase.y))
     }
 }
 
