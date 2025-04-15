@@ -1,22 +1,19 @@
 package com.example.labyrinthe
 
-class Level {
+import android.content.Context
+
+class Level(private val context: Context) {
     private var isRunning = false
-    init {
-        //Game loop ?
-        //What happens when a new level is created ?
-        val map = Map()
-    }
+    private lateinit var map: Map
+    private val listeners = mutableListOf<GameEventListener>() //Objects that implement GameEventListener.
 
     /**
      * Starts the current level's loop. There is no need for real time as it is a simple 2D single-player game.
      */
     fun run() {
         while(isRunning) {
-            //1) Listen to events if any
-            //2) Handle them
-            //3) Update what's shown on the screen.
-            TODO("Implement")
+            dispatchEvents() //Handle events that occurred
+            TODO("Implement : Update what's shown on the screen")
         }
     }
 
@@ -26,4 +23,22 @@ class Level {
     fun stop(){
         isRunning = false
     }
+
+    /**
+     * Loads the map that resides in filepath
+     */
+    fun loadMap(filepath: String) {
+        map = Map(context, filepath)
+    }
+
+    /**
+     * Dispatches the events in the EventQueue to the relevant listeners.
+     */
+    fun dispatchEvents() {
+        val events = EventQueue.pollAll()
+        for (event in events) {
+            listeners.forEach { it.onEvent(event) }
+        }
+    }
+
 }
