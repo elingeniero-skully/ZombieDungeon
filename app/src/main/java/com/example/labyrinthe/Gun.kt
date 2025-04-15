@@ -1,4 +1,4 @@
 package com.example.labyrinthe
 
-class Gun: Weapon() {
+class Gun(name: String, damage: Int): Weapon(name, damage) {
 }

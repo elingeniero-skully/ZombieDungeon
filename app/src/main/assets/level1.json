@@ -2,6 +2,21 @@
   "width":5,
   "height":5,
   "cases":[
-    {"x" : 0, "y" : 0, "type" : "WALL"}
+    {"x" : 0, "y" : 0, "type" : "WALL", "details" : {}},
+    {"x" : 0, "y" : 1, "type" : "WALL", "details" : {}},
+    {"x" : 0, "y" : 2, "type" : "PLAYER", "details" : {
+      "weapons" : [
+      {"type" : "GUN", "name" : "FN Scar", "damage" : 75},
+      {"type" : "KNIFE", "name" : "Couteau de Kebab", "damage" : 25}
+    ]
+    }},
+    {"x" : 0, "y" : 3, "type" : "WALL", "details" : {}},
+    {"x" : 0, "y" : 4, "type" : "WALL", "details" : {}},
+    {"x" : 0, "y" : 2, "type" : "MOB", "details" : {
+      "movementPattern" : "random",
+      "weapons" : [
+        {"type" : "GUN", "name" : "FN Five-Seven", "damage" : 50}
+      ]
+    }}
   ]
 }

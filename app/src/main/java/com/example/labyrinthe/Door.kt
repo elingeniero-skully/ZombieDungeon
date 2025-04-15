@@ -13,10 +13,7 @@ class Door(position: Vector2D): Wall(position) {
  * Used by the JsonParser.
  */
 @Serializable
-data class DoorStructure(
-    val x: Int,
-    val y: Int
-)
+class DoorStructure()
 
 /**
  * Parser for the Wall class.
@@ -24,6 +21,6 @@ data class DoorStructure(
 class DoorJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Door {
         val structure = Json.decodeFromJsonElement<DoorStructure>(mapCase.details)
-        return Door(Vector2D(structure.x, structure.y))
+        return Door(Vector2D(mapCase.x, mapCase.y))
     }
 }

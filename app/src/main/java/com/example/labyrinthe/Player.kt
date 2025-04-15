@@ -4,8 +4,16 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
 
-class Player(val positionArg: Vector2D): Entity(), UseKey {
+class Player(positionArg: Vector2D, inventory: List<Item>?): Entity(), UseKey, GameEventListener {
     override var position = positionArg
+
+    override fun onEvent(event: GameEvent, queue: EventQueue) {
+        when (event) {
+            is PlayerMovedEvent -> {
+                //Request a move to the map.
+            }
+        }
+    }
 }
 
 /**
@@ -13,9 +21,8 @@ class Player(val positionArg: Vector2D): Entity(), UseKey {
  * Used by the JsonParser.
  */
 @Serializable
-data class PlayerStructure(
-    val x: Int,
-    val y: Int
+class PlayerStructure(
+    val weapons: List<WeaponStructure>
 )
 
 /**
@@ -24,6 +31,21 @@ data class PlayerStructure(
 class PlayerJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Player {
         val structure = Json.decodeFromJsonElement<PlayerStructure>(mapCase.details)
-        return Player(Vector2D(structure.x, structure.y))
+        val inventory = mutableListOf<Item>()
+
+        //Adding weapons to the inventory
+        for (weapon in structure.weapons) {
+            when (weapon.type) {
+                WeaponType.GUN -> inventory.add(Gun(weapon.name, weapon.damage))
+                WeaponType.KNIFE -> inventory.add(Knife(weapon.name, weapon.damage))
+            }
+        }
+
+        return Player(Vector2D(mapCase.x, mapCase.y), inventory)
     }
 }
+
+/**
+ * Events related to the Player class
+ */
+class PlayerMovedEvent(val dx: Int, val dy: Int) : GameEvent()

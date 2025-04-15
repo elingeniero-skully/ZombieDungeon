@@ -4,7 +4,8 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
 
-class Boss(position: Vector2D, movementPattern: MovementPattern = RandomMovementPattern()): Mob(position, movementPattern) {
+class Boss(position: Vector2D, movementPattern: MovementPattern = RandomMovementPattern(), inventory: List<Item>?):
+    Mob(position, movementPattern, inventory) {
 
 
 }
@@ -15,9 +16,8 @@ class Boss(position: Vector2D, movementPattern: MovementPattern = RandomMovement
  */
 @Serializable
 data class BossStructure(
-    val x: Int,
-    val y: Int,
-    val movementPattern: String
+    val movementPattern: String,
+    val weapons: List<WeaponStructure>
 )
 
 /**
@@ -27,6 +27,7 @@ class BossJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Boss {
         val structure = Json.decodeFromJsonElement<BossStructure>(mapCase.details)
         var movementPattern: Mob.MovementPattern = Mob.RandomMovementPattern()
+        val inventory = mutableListOf<Item>()
 
         when (structure.movementPattern) {
             "random"   -> movementPattern = Mob.RandomMovementPattern()
@@ -35,6 +36,14 @@ class BossJsonParser() : JsonParser() {
             "circular" -> movementPattern = Mob.CircularMovementPattern()
         }
 
-        return Boss(Vector2D(structure.x, structure.y), movementPattern)
+        //Adding weapons to the inventory
+        for (weapon in structure.weapons) {
+            when (weapon.type) {
+                WeaponType.GUN -> inventory.add(Gun(weapon.name, weapon.damage))
+                WeaponType.KNIFE -> inventory.add(Knife(weapon.name, weapon.damage))
+            }
+        }
+
+        return Boss(Vector2D(mapCase.x, mapCase.y), movementPattern, inventory)
     }
 }

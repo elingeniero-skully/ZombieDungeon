@@ -1,0 +1,100 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0" version="26.2.12">
+  <diagram name="Page-1" id="XEMrRwx_c5FzjxG7CcN3">
+    <mxGraphModel dx="1426" dy="1886" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="95tOUABc1Qabo5AeG88Y-2" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;" vertex="1" parent="1">
+          <mxGeometry x="90" y="80" width="20" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-4" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="95tOUABc1Qabo5AeG88Y-2">
+          <mxGeometry x="5" y="60" width="10" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-3" value="curLevel:Level" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="240" y="80" width="100" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-6" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="95tOUABc1Qabo5AeG88Y-3">
+          <mxGeometry x="45" y="60" width="10" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-5" value="e=KeyPressedEvent(RightArrow)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="105" y="140" as="sourcePoint" />
+            <mxPoint x="285" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-9" value="queue:EventQueue" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="490" y="80" width="110" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-10" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="95tOUABc1Qabo5AeG88Y-9">
+          <mxGeometry x="50" y="90" width="10" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-11" value="&lt;div&gt;enqueueExternal(MapUpdateEvent)&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1" source="95tOUABc1Qabo5AeG88Y-6" target="95tOUABc1Qabo5AeG88Y-10">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="330" y="280" as="sourcePoint" />
+            <mxPoint x="510" y="280" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="370" y="170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-13" value="dispatchAll(listeners)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1" target="95tOUABc1Qabo5AeG88Y-10">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="295" y="210" as="sourcePoint" />
+            <mxPoint x="450" y="210" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="340" y="210" />
+              <mxPoint x="427.5" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-18" value="onEvent(e, this)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1" target="95tOUABc1Qabo5AeG88Y-20">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="550" y="220" as="sourcePoint" />
+            <mxPoint x="755" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-19" value="map:Map" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="700" y="80" width="100" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-20" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="95tOUABc1Qabo5AeG88Y-19">
+          <mxGeometry x="45" y="140" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-23" value="player:Player" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="850" y="80" width="100" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-24" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="95tOUABc1Qabo5AeG88Y-23">
+          <mxGeometry x="45" y="60" width="10" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-35" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="95tOUABc1Qabo5AeG88Y-23">
+          <mxGeometry x="55" y="240" width="10" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-36" value="setX, setY" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" target="95tOUABc1Qabo5AeG88Y-35" parent="95tOUABc1Qabo5AeG88Y-23" source="95tOUABc1Qabo5AeG88Y-24">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="60" y="220" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="90" y="230" />
+              <mxPoint x="90" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-25" value="enqueueInternal(PlayerMovedEvent)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry x="-0.0256" width="80" relative="1" as="geometry">
+            <mxPoint x="745" y="260" as="sourcePoint" />
+            <mxPoint x="550" y="260" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-34" value="onEvent(PlayerMovedEvent, this)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1" target="95tOUABc1Qabo5AeG88Y-24">
+          <mxGeometry x="-0.4521" width="80" relative="1" as="geometry">
+            <mxPoint x="550" y="300" as="sourcePoint" />
+            <mxPoint x="925" y="300" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="95tOUABc1Qabo5AeG88Y-40" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Event Handling System&lt;/h1&gt;&lt;p&gt;New events are initially added to the external queue. When &lt;code data-end=&quot;192&quot; data-start=&quot;177&quot;&gt;dispatchAll()&lt;/code&gt; is invoked, all events from the external queue are transferred into the internal queue. The internal queue is then processed sequentially: each event may trigger additional events, which are also enqueued internally and handled within the same dispatch cycle. Once the internal queue is fully processed—following the entire chain of triggered events—&lt;code data-end=&quot;558&quot; data-start=&quot;543&quot;&gt;dispatchAll()&lt;/code&gt; returns. Any new external events generated during this cycle are stored in the external queue and will be handled on the next call to &lt;code data-end=&quot;708&quot; data-start=&quot;693&quot;&gt;dispatchAll()&lt;/code&gt;. This design ensures that event processing remains fully synchronous and avoids any risk of desynchronization between causally linked events.&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="-80" width="930" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
