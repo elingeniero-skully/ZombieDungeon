@@ -18,10 +18,9 @@ class KeyPressedEvent(val keyCode: Int) : GameEvent()
 class EventQueue {
     private val internalQueue: ArrayDeque<GameEvent> = ArrayDeque()
     private val externalQueue: ArrayDeque<GameEvent> = ArrayDeque()
-    private var locked = false
 
     fun enqueueExternal(event: GameEvent) {
-        if (!locked) externalQueue.add(event)
+        externalQueue.add(event)
     }
 
     fun enqueueInternal(event: GameEvent) {
@@ -29,8 +28,6 @@ class EventQueue {
     }
 
     fun dispatchAll(listeners: List<GameEventListener>) {
-        locked = true
-
         // Puts external events into the internal queue.
         internalQueue.addAll(externalQueue)
         externalQueue.clear()
@@ -39,7 +36,5 @@ class EventQueue {
             val event = internalQueue.removeFirst()
             listeners.forEach { it.onEvent(event, this) }
         }
-
-        locked = false
     }
 }
