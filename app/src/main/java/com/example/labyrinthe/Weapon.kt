@@ -11,7 +11,7 @@ enum class WeaponType { GUN, KNIFE }
  * Used by the JsonParser.
  */
 @Serializable
-class WeaponStructure(
+class WeaponJsonStructure(
     val type: WeaponType,
     val name: String,
     val damage: Int

@@ -65,7 +65,7 @@ open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomM
 @Serializable
 data class MobJsonStructure(
     val movementPattern: String,
-    val weapons: List<WeaponStructure>
+    val weapons: List<WeaponJsonStructure>
 )
 
 /**
