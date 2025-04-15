@@ -5,5 +5,5 @@ package com.example.labyrinthe
  * E.g. The Player class could react to a PLayerMove event by requesting a move to the map.
  */
 interface GameEventListener {
-    fun onEvent(event: GameEvent)
+    fun onEvent(event: GameEvent, queue: EventQueue)
 }

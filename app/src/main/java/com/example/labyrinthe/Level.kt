@@ -6,13 +6,15 @@ class Level(private val context: Context) {
     private var isRunning = false
     private lateinit var map: Map
     private val listeners = mutableListOf<GameEventListener>() //Objects that implement GameEventListener.
+    val queue = EventQueue()
 
     /**
      * Starts the current level's loop. There is no need for real time as it is a simple 2D single-player game.
      */
     fun run() {
         while(isRunning) {
-            dispatchEvents() //Handle events that occurred
+            //1) Handle events that occurred
+            queue.dispatchAll(listeners)
             TODO("Implement : Update what's shown on the screen")
         }
     }
@@ -30,15 +32,4 @@ class Level(private val context: Context) {
     fun loadMap(filepath: String) {
         map = Map(context, filepath)
     }
-
-    /**
-     * Dispatches the events in the EventQueue to the relevant listeners.
-     */
-    fun dispatchEvents() {
-        val events = EventQueue.pollAll()
-        for (event in events) {
-            listeners.forEach { it.onEvent(event) }
-        }
-    }
-
 }

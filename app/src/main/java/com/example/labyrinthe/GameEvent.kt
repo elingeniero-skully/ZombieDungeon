@@ -10,21 +10,36 @@ abstract class GameEvent {
 
 //Some examples of events.
 class KeyPressedEvent(val keyCode: Int) : GameEvent()
-class PlayerMovedEvent(val dx: Int, val dy: Int) : GameEvent()
 
 /**
- * The event queue is a singleton that contains all the events yet to be processed.
+ * The internal queue contains events that are being processed in the current "tick".
+ * The external queue contains "external" events such as a key press.
  */
-object EventQueue {
-    private val queue = mutableListOf<GameEvent>()
+class EventQueue {
+    private val internalQueue: ArrayDeque<GameEvent> = ArrayDeque()
+    private val externalQueue: ArrayDeque<GameEvent> = ArrayDeque()
+    private var locked = false
 
-    fun push(event: GameEvent) {
-        queue.add(event)
+    fun enqueueExternal(event: GameEvent) {
+        if (!locked) externalQueue.add(event)
     }
 
-    fun pollAll(): List<GameEvent> {
-        val events = queue.toList()
-        queue.clear()
-        return events
+    fun enqueueInternal(event: GameEvent) {
+        internalQueue.add(event)
+    }
+
+    fun dispatchAll(listeners: List<GameEventListener>) {
+        locked = true
+
+        // Puts external events into the internal queue.
+        internalQueue.addAll(externalQueue)
+        externalQueue.clear()
+
+        while (internalQueue.isNotEmpty()) {
+            val event = internalQueue.removeFirst()
+            listeners.forEach { it.onEvent(event, this) }
+        }
+
+        locked = false
     }
 }
