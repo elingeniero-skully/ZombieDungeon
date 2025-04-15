@@ -63,7 +63,7 @@ open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomM
  * Used by the JsonParser.
  */
 @Serializable
-data class MobStructure(
+data class MobJsonStructure(
     val movementPattern: String,
     val weapons: List<WeaponStructure>
 )
@@ -73,7 +73,7 @@ data class MobStructure(
  */
 class MobJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Mob {
-        val structure = Json.decodeFromJsonElement<MobStructure>(mapCase.details)
+        val structure = Json.decodeFromJsonElement<MobJsonStructure>(mapCase.details)
         var movementPattern: Mob.MovementPattern = Mob.RandomMovementPattern()
         val inventory = mutableListOf<Item>()
 

@@ -12,7 +12,7 @@
     }},
     {"x" : 0, "y" : 3, "type" : "WALL", "details" : {}},
     {"x" : 0, "y" : 4, "type" : "WALL", "details" : {}},
-    {"x" : 0, "y" : 2, "type" : "MOB", "details" : {
+    {"x" : 0, "y" : 2, "type" : "BOSS", "details" : {
       "movementPattern" : "random",
       "weapons" : [
         {"type" : "GUN", "name" : "FN Five-Seven", "damage" : 50}

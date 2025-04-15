@@ -8,18 +8,10 @@ open class Wall(positionArg: Vector2D): GameObject(), Drawable {
 }
 
 /**
- * Data structure that represents a serialized version of a Wall object.
- * Used by the JsonParser.
- */
-@Serializable
-class WallStructure()
-
-/**
- * Parser for the Wall class.
+ * Parser for the Wall class. No structure (for additional info) needed for now.
  */
 class WallJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Wall {
-        val structure = Json.decodeFromJsonElement<WallStructure>(mapCase.details)
         return Wall(Vector2D(mapCase.x, mapCase.y))
     }
 }

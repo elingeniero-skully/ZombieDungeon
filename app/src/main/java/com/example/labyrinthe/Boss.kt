@@ -11,21 +11,11 @@ class Boss(position: Vector2D, movementPattern: MovementPattern = RandomMovement
 }
 
 /**
- * Data structure that represents a serialized version of the object.
- * Used by the JsonParser.
- */
-@Serializable
-data class BossStructure(
-    val movementPattern: String,
-    val weapons: List<WeaponStructure>
-)
-
-/**
- * Parser of the class.
+ * Parser of the class. Mob structure is suitable to store the Json data of the Boss class.
  */
 class BossJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Boss {
-        val structure = Json.decodeFromJsonElement<BossStructure>(mapCase.details)
+        val structure = Json.decodeFromJsonElement<MobJsonStructure>(mapCase.details)
         var movementPattern: Mob.MovementPattern = Mob.RandomMovementPattern()
         val inventory = mutableListOf<Item>()
 

@@ -21,7 +21,7 @@ class Player(positionArg: Vector2D, inventory: List<Item>?): Entity(), UseKey, G
  * Used by the JsonParser.
  */
 @Serializable
-class PlayerStructure(
+class PlayerJsonStructure(
     val weapons: List<WeaponStructure>
 )
 
@@ -30,7 +30,7 @@ class PlayerStructure(
  */
 class PlayerJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Player {
-        val structure = Json.decodeFromJsonElement<PlayerStructure>(mapCase.details)
+        val structure = Json.decodeFromJsonElement<PlayerJsonStructure>(mapCase.details)
         val inventory = mutableListOf<Item>()
 
         //Adding weapons to the inventory
