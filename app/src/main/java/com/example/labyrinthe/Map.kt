@@ -64,6 +64,7 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
                         } else if (nextObject == null) {
                             player.moveBackward()
                             EventManager.notify(GameEvent.RenderEvent)
+                            EventManager.notify(GameEvent.BossKilledEvent)
                         }
                     }
                 }

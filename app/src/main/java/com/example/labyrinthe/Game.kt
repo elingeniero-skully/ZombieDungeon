@@ -25,6 +25,7 @@ class Game(private val context: Context, private val container: FrameLayout) : G
                     currentLevel = Level(context, levelFilePaths[currentLevelIndex])
                     EventManager.notify(GameEvent.RenderEvent)
                 } else {
+                    currentLevel.stop()
                     EventManager.notify(GameEvent.GameFinished)
                 }
 
