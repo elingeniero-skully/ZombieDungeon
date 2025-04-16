@@ -7,7 +7,7 @@ import android.view.SurfaceView
 import kotlin.math.*
 class GameView(context: Context, private val game: Game) : SurfaceView(context), SurfaceHolder.Callback, GameEventObserver {
     private val gridDimensions: Vector2D = game.currentLevel.map.maxSize
-    private val player: Player = game.currentLevel.map.getPlayerObject()
+    private val player: Player = game.currentLevel.map.findObjectOfType<Player>()
     private var tileSize = 0
 
     init {
@@ -65,7 +65,13 @@ class GameView(context: Context, private val game: Game) : SurfaceView(context),
 
                     //Paint the object on the tile, if any
                     when (objectAtPosition) {
-                        is Door   -> it.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), Door.paint)
+                        is Door   -> {
+                            if (objectAtPosition.unlocked) {
+                                it.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), Door.paintUnlocked)
+                            } else {
+                                it.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), Door.paint)
+                            }
+                        }
                         is Wall   -> it.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), Wall.paint)
                         is Boss   -> objectAtPosition.draw(it, Boss.paint, tileSize)
                         is Mob    -> objectAtPosition.draw(it, Mob.paint, tileSize)

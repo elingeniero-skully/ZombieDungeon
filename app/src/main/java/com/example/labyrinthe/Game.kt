@@ -1,8 +1,9 @@
 package com.example.labyrinthe
 
 import android.content.Context
+import android.widget.FrameLayout
 
-class Game(private val context: Context) : GameEventObserver {
+class Game(private val context: Context, private val container: FrameLayout) : GameEventObserver {
     private val levelFilePaths = mutableListOf<String>()
     private var currentLevelIndex = 0
     lateinit var currentLevel: Level
@@ -42,5 +43,10 @@ class Game(private val context: Context) : GameEventObserver {
      */
     fun start() {
         currentLevel = Level(context, levelFilePaths[0])
+        val gameView = GameView(context, this)
+        EventManager.subscribe(gameView) //Make gameView reactive to the game events.
+        container.addView(gameView)
+
+
     }
 }

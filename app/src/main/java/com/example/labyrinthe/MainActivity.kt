@@ -38,14 +38,10 @@ class MainActivity : AppCompatActivity() {
         // e.g. startGameLoop(), initPlayer(), etc.
 
         val container = findViewById<FrameLayout>(R.id.gameMapContainer)
-        val game = Game(this)
+        val game = Game(this, container)
         game.start()
-        val gameView = GameView(this, game)
 
-        //Make gameView reactive to the game events.
-        EventManager.subscribe(gameView)
-
-        container.addView(gameView)
+        //GameView is created and managed in the Game object.
 
         // Linking buttons
         findViewById<Button>(R.id.btnUp).setOnClickListener {

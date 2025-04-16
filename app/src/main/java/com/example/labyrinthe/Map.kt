@@ -33,7 +33,7 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
     override fun onGameEvent(event: GameEvent) {
         when (event) {
             is GameEvent.PlayerMoveRequest -> {
-                val player = getPlayerObject() //Retrieve the player object on the map.
+                val player = findObjectOfType<Player>() //Retrieve the player object on the map.
 
                 when(event.direction) {
                     "rotate left" -> {
@@ -46,19 +46,32 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
                     }
                     "up" -> {
                         //Collision check in the sight direction.
-                        if (checkCollisionForward(player.position, Vector2D.fromSightDirection(player.sightDirection)) == null) {
+                        val nextObject = checkCollisionForward(player.position, Vector2D.fromSightDirection(player.sightDirection))
+
+                        if (nextObject is Door && nextObject.unlocked) {
+                            EventManager.notify(GameEvent.LevelSucceedEvent)
+                        } else if (nextObject == null) {
                             player.moveForward()
                             EventManager.notify(GameEvent.RenderEvent)
                         }
                     }
                     "down" -> {
                         //Collision check in the sight direction.
-                        if (checkCollisionBackward(player.position, Vector2D.fromSightDirection(player.sightDirection)) == null) {
+                        val nextObject = checkCollisionBackward(player.position, Vector2D.fromSightDirection(player.sightDirection))
+
+                        if (nextObject is Door && nextObject.unlocked) {
+                            EventManager.notify(GameEvent.LevelSucceedEvent)
+                        } else if (nextObject == null) {
                             player.moveBackward()
                             EventManager.notify(GameEvent.RenderEvent)
                         }
                     }
                 }
+            }
+            is GameEvent.BossKilledEvent -> {
+                val door = findObjectOfType<Door>()
+                door.unlocked = true
+                EventManager.notify(GameEvent.RenderEvent)
             }
 
             else -> {}
@@ -84,10 +97,10 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
     }
 
     /**
-     * Returns the Player object
+     * Returns the first instance of specified type from the objectsOnTheMap.
      */
-    fun getPlayerObject(): Player {
-        return objectsOnTheMap.filterIsInstance<Player>().first()
+    inline fun <reified T : GameObject> findObjectOfType(): T {
+        return objectsOnTheMap.filterIsInstance<T>().first()
     }
 
     /**

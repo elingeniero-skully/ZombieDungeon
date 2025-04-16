@@ -16,4 +16,9 @@ sealed class GameEvent {
      * Use it with moderation as the whole map is rendered again !
      */
     object RenderEvent: GameEvent()
+
+    /**
+     * Event that triggers the door unlocking.
+     */
+    object BossKilledEvent: GameEvent()
 }
