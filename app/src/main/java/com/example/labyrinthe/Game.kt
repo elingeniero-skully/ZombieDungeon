@@ -23,9 +23,7 @@ class Game(private val context: Context, private val container: FrameLayout) : G
                     unloadMap()
                     currentLevelIndex++
                     loadMap(levelFilePaths[currentLevelIndex])
-
-                    gameView = GameView(context, this)
-                    EventManager.notify(GameEvent.RenderEvent)
+                    updateView()
                 } else {
                     unloadMap()
                     EventManager.notify(GameEvent.GameFinished)
@@ -39,6 +37,16 @@ class Game(private val context: Context, private val container: FrameLayout) : G
             }
             else -> {}
         }
+    }
+
+    /**
+     * Updates the view
+     */
+    fun updateView() {
+        gameView = GameView(context, this)
+        EventManager.subscribe(gameView) //Make gameView reactive to the game events.
+        container.removeAllViews()
+        container.addView(gameView)
     }
 
     /**
