@@ -4,154 +4,116 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/cardview_dark_background">
 
     <!-- Map / Game View (3/4 of screen) -->
-
     <FrameLayout
         android:id="@+id/gameMapContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="4"
         android:background="#242282" />
 
-
     <!-- Controls / Stats (1/4 of screen) -->
-
     <LinearLayout
-        android:id="@+id/controlPanel"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#333333"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:background="@color/cardview_dark_background"
+        android:layout_margin="10dp">
 
-        <!-- LEFT: D-Pad -->
+        <!-- GridLayout for buttons -->
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="3">
 
-        <LinearLayout
-            android:id="@+id/movementPad"
-            android:layout_width="146dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="start|center_vertical"
-            android:orientation="vertical">
+            <!-- Up Button -->
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.IconButton"
+                app:icon="@drawable/baseline_arrow_upward_24"
+                android:id="@+id/btnUp"
+                app:backgroundTint="?android:attr/colorButtonNormal"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:contentDescription="Move Up" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+            <!-- Left Button -->
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.IconButton"
+                app:icon="@drawable/baseline_rotate_right_24"
+                android:id="@+id/btnLeft"
+                app:backgroundTint="?android:attr/colorButtonNormal"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:scaleX="-1"
+                android:contentDescription="Move Left" />
 
-                <Space
-                    android:layout_width="71dp"
-                    android:layout_height="15dp" />
+            <!-- Right Button -->
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.IconButton"
+                app:icon="@drawable/baseline_rotate_right_24"
+                android:id="@+id/btnRight"
+                app:backgroundTint="?android:attr/colorButtonNormal"
+                android:layout_row="1"
+                android:layout_column="2"
+                android:contentDescription="Move Right" />
 
-                <Button
-                    android:id="@+id/btnUp"
-                    android:layout_width="64dp"
-                    android:layout_height="match_parent"
-                    android:text="↑"
-                    app:icon="@android:drawable/arrow_up_float" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="58dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnLeft"
-                    android:layout_width="66dp"
-                    android:layout_height="match_parent"
-                    android:text="↺"/>
-
-                <Space
-                    android:layout_width="73dp"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/btnRight"
-                    android:layout_width="65dp"
-                    android:layout_height="58dp"
-                    android:text="↻"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="72dp"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/btnDown"
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
-                    android:text="↓"
-                    app:icon="@android:drawable/arrow_down_float" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-
-        <!-- RIGHT: Action Buttons -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <!-- MIDDLE: Stats -->
-
-            <TextView
-                android:id="@+id/tvHealth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="HP: 100"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tvAmmo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ammo: 15"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/actionPanel"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="end|center_vertical"
-            android:orientation="vertical">
-
-            <Button
+            <!-- Shoot Button -->
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.IconButton"
                 android:id="@+id/btnShoot"
+                app:icon="@drawable/baseline_api_24"
+                app:backgroundTint="?android:attr/colorButtonNormal"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:contentDescription="Shoot" />
+
+            <!-- Down Button -->
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.IconButton"
+                android:id="@+id/btnDown"
+                app:icon="@drawable/baseline_arrow_upward_24"
+                app:backgroundTint="?android:attr/colorButtonNormal"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:scaleY="-1"
+                android:contentDescription="Move Down" />
+
+        </GridLayout>
+
+        <!-- Health Stats -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Health TextView -->
+            <TextView
+                android:id="@+id/healthTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Shoot" />
+                android:layout_marginLeft="20dp"
+                android:text="Health"
+                android:textStyle="bold"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="18sp" />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="16dp" />
-
-            <Button
-                android:id="@+id/btnInventory"
+            <!-- Health Value TextView -->
+            <TextView
+                android:id="@+id/healthValueTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Inventory" />
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:text="100/100"
+                android:drawableStart="@drawable/baseline_arrow_right_24"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="18sp" />
+
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>

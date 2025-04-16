@@ -66,11 +66,6 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
             //TODO: implement shoot method and link it to the corresponding button
             //The behaviour will change depending on the active item in the inventory
         }
-        findViewById<Button>(R.id.btnInventory).setOnClickListener{
-            //TODO: make the inventory appear with the items shown
-            EventManager.notify(GameEvent.ShowInventory)
-        }
-
     }
 
     private fun showCredits() {
