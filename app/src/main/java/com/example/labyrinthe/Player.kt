@@ -6,8 +6,9 @@ import android.graphics.Paint
 import android.graphics.Path
 import kotlin.math.*
 
-class Player(positionArg: Vector2D, inventory: List<Item>?): Entity(), UseKey {
+class Player(positionArg: Vector2D, inventoryArg: MutableList<Item>): Entity(), UseKey {
     override var position = positionArg
+    override var inventory: MutableList<Item> = inventoryArg
 
     companion object {
         val paint = Paint().apply{

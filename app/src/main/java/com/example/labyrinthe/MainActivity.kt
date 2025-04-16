@@ -40,7 +40,10 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
         // e.g. startGameLoop(), initPlayer(), etc.
 
         val container = findViewById<FrameLayout>(R.id.gameMapContainer)
-        val game = Game(this, container)
+        val inventoryContainer = findViewById<FrameLayout>(R.id.inventoryContainer)
+
+        val game = Game(this, container, inventoryContainer)
+
         game.start()
 
         //GameView is created and managed in the Game object.
@@ -65,6 +68,10 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
         findViewById<Button>(R.id.btnShoot).setOnClickListener{
             //TODO: implement shoot method and link it to the corresponding button
             //The behaviour will change depending on the active item in the inventory
+        }
+
+        findViewById<Button>(R.id.btnSwitchActiveItem).setOnClickListener{
+            EventManager.notify(GameEvent.SwitchActiveItemEvent)
         }
     }
 

@@ -12,8 +12,15 @@
         android:id="@+id/gameMapContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="3.5"
         android:background="#242282" />
+
+    <FrameLayout
+        android:id="@+id/inventoryContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:background="@color/white" />
 
     <!-- Controls / Stats (1/4 of screen) -->
     <LinearLayout
@@ -30,6 +37,16 @@
             android:layout_height="wrap_content"
             android:columnCount="3"
             android:rowCount="3">
+
+            <!-- Switch Item Button -->
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.IconButton"
+                app:icon="@drawable/baseline_chevron_right_24"
+                android:id="@+id/btnSwitchActiveItem"
+                app:backgroundTint="?android:attr/colorButtonNormal"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:contentDescription="Move Left Inventory" />
 
             <!-- Up Button -->
             <com.google.android.material.button.MaterialButton

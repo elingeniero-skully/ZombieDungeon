@@ -21,4 +21,6 @@ sealed class GameEvent {
     object BossKilledEvent: GameEvent()
 
     object GameFinished: GameEvent()
+
+    object SwitchActiveItemEvent : GameEvent()
 }

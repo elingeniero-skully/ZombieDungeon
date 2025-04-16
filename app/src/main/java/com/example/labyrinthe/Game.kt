@@ -3,10 +3,11 @@ package com.example.labyrinthe
 import android.content.Context
 import android.widget.FrameLayout
 
-class Game(private val context: Context, private val container: FrameLayout) : GameEventObserver {
+class Game(private val context: Context, private val container: FrameLayout, private val inventoryContainer: FrameLayout) : GameEventObserver {
     private val levelFilePaths = mutableListOf<String>()
     private var currentLevelIndex = 0
     lateinit var gameView: GameView
+    lateinit var inventoryView: InventoryView
     lateinit var map: Map
 
     init {
@@ -24,6 +25,7 @@ class Game(private val context: Context, private val container: FrameLayout) : G
                     currentLevelIndex++
                     loadMap(levelFilePaths[currentLevelIndex])
                     updateView()
+                    updateInventory()
                 } else {
                     unloadMap()
                     EventManager.notify(GameEvent.GameFinished)
@@ -33,6 +35,7 @@ class Game(private val context: Context, private val container: FrameLayout) : G
             is GameEvent.LevelFailedEvent -> {
                 unloadMap()
                 EventManager.unsubscribe(gameView)
+                EventManager.unsubscribe(inventoryView)
                 EventManager.notify(GameEvent.GameFinished)
             }
             else -> {}
@@ -47,6 +50,16 @@ class Game(private val context: Context, private val container: FrameLayout) : G
         EventManager.subscribe(gameView) //Make gameView reactive to the game events.
         container.removeAllViews()
         container.addView(gameView)
+    }
+
+    /**
+     * Updates the inventory
+     */
+    fun updateInventory() {
+        inventoryView = InventoryView(context, this)
+        EventManager.subscribe(inventoryView) //Make gameView reactive to the game events.
+        inventoryContainer.removeAllViews()
+        inventoryContainer.addView(inventoryView)
     }
 
     /**
@@ -69,7 +82,12 @@ class Game(private val context: Context, private val container: FrameLayout) : G
         loadMap(levelFilePaths[0])
 
         gameView = GameView(context, this)
+        inventoryView = InventoryView(context,this)
+
         EventManager.subscribe(gameView) //Make gameView reactive to the game events.
+        EventManager.subscribe(inventoryView)
+
         container.addView(gameView)
+        inventoryContainer.addView(inventoryView)
     }
 }

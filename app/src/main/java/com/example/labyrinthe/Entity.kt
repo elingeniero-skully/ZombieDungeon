@@ -7,7 +7,7 @@ import kotlin.math.*
 
 abstract class Entity: GameObject(), Drawable {
     var health = 100
-    var inventory = mutableListOf<Item>()
+    open var inventory = mutableListOf<Item>()
     var sightDirection = 0
 
     /**

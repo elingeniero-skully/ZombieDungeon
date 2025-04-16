@@ -7,8 +7,9 @@
     {"x" : 0, "y" : 3, "type" : "PLAYER", "details" : {
       "weapons" : [
       {"type" : "GUN", "name" : "FN Scar", "damage" : 75},
-      {"type" : "KNIFE", "name" : "Couteau de Kebab", "damage" : 25}
-    ]
+      {"type" : "KNIFE", "name" : "Couteau de Kebab", "damage" : 25},
+        {"type" : "GUN", "name" : "Beretta", "damage" : 35}
+      ]
     }},
     {"x" : 0, "y" : 5, "type" : "WALL", "details" : {}},
     {"x" : 0, "y" : 2, "type" : "BOSS", "details" : {

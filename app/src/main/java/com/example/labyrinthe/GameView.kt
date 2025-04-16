@@ -2,6 +2,7 @@ package com.example.labyrinthe
 
 import android.content.Context
 import android.graphics.*
+import android.util.Log
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import kotlin.math.*
@@ -48,6 +49,9 @@ class GameView(context: Context, private val game: Game) : SurfaceView(context),
                     val top = y * tileSize
                     val right = left + tileSize
                     val bottom = top + tileSize
+
+                    Log.d("GameView", "Drawing tile at ($left, $top), ($right, $bottom)")
+                    Log.d("GameView", "InventoryView dimensions: width = $width, height = $height")
 
                     val objectAtPosition = game.map.getElementByPosition(Vector2D(x,y)) //GameObject at current position
 
