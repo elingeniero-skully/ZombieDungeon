@@ -1,5 +1,6 @@
 package com.example.labyrinthe
 
+import android.graphics.Canvas
 import android.graphics.Paint
 
 /**
@@ -7,5 +8,9 @@ import android.graphics.Paint
  */
 interface Drawable {
     var position: Vector2D //Position of the drawable object.
-    var paint: Paint //Defines the paint of the drawable object.
+
+    /**
+     * Draw method of the class on the map.
+     */
+    //fun draw(canvas: Canvas, tileSize: Int) Arguments may vary...
 }

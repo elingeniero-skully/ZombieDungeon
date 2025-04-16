@@ -4,7 +4,7 @@ import android.content.Context
 
 class Level(private val context: Context, val mapFilePath: String) {
     private var isRunning = false
-    private val map: Map
+    val map: Map
     private val listeners = mutableListOf<GameEventListener>() //Objects that implement GameEventListener.
     private val queue = EventQueue()
 

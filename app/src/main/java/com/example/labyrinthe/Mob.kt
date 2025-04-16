@@ -10,10 +10,12 @@ import android.graphics.Paint
 open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomMovementPattern(), inventory: List<Item>?): Entity() {
     override var position = positionArg
 
-    override var paint = Paint().apply{
-        color = Color.LTGRAY
-        style = Paint.Style.STROKE
-        strokeWidth = 2f
+    companion object{
+        val paint = Paint().apply{
+            color = Color.LTGRAY
+            style = Paint.Style.STROKE
+            strokeWidth = 2f
+        }
     }
 
     /**

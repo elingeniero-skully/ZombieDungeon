@@ -7,7 +7,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 
-class Map(private val context: Context, val fileNameInAssets: String) {
+class Map(context: Context, fileNameInAssets: String) {
     val maxSize: Vector2D //Maximum size of the map (will be initialized in the init block)
     val objectsOnTheMap = mutableListOf<GameObject>() //Only Entity or Wall : they are drawable and have a position.
 
@@ -47,6 +47,13 @@ class Map(private val context: Context, val fileNameInAssets: String) {
      */
     fun getElementByPosition(position: Vector2D): GameObject? {
         return objectsOnTheMap.find { it is Drawable && it.position == position }
+    }
+
+    /**
+     * Returns the Player object
+     */
+    fun getPlayerObject(): Player {
+        return objectsOnTheMap.filterIsInstance<Player>().first()
     }
 
     /**

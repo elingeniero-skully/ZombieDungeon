@@ -5,9 +5,12 @@ import android.graphics.Paint
 
 open class Wall(positionArg: Vector2D): GameObject(), Drawable {
     override var position = positionArg
-    override var paint = Paint().apply{
-        color = Color.LTGRAY
-        style = Paint.Style.STROKE
-        strokeWidth = 2f
+
+    companion object {
+        var paint = Paint().apply{
+            color = Color.LTGRAY
+            style = Paint.Style.STROKE
+            strokeWidth = 2f
+        }
     }
 }
