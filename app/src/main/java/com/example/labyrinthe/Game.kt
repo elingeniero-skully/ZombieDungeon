@@ -7,12 +7,12 @@ class Game(private val context: Context, private val container: FrameLayout) : G
     private val levelFilePaths = mutableListOf<String>()
     private var currentLevelIndex = 0
     lateinit var currentLevel: Level
+    lateinit var gameView: GameView
 
     init {
         //Retrieve files from assets.
         levelFilePaths.add("level1.json")
         levelFilePaths.add("level2.json")
-        levelFilePaths.add("level3.json")
         EventManager.subscribe(this)
     }
 
@@ -23,30 +23,24 @@ class Game(private val context: Context, private val container: FrameLayout) : G
                     currentLevel.stop()
                     currentLevelIndex++
                     currentLevel = Level(context, levelFilePaths[currentLevelIndex])
+                    EventManager.notify(GameEvent.RenderEvent)
                 } else {
-                    TODO("What happens when all the levels are succeeded so the game is finished ?")
+                    EventManager.notify(GameEvent.GameFinished)
                 }
 
             }
             is GameEvent.LevelFailedEvent -> {
                 currentLevel.stop()
-                //TODO : What happens when the level is failed ?
+                EventManager.notify(GameEvent.GameFinished)
             }
-            else -> {
-
-            }
+            else -> {}
         }
     }
 
-    /**
-     * Starts the game at level 0
-     */
     fun start() {
         currentLevel = Level(context, levelFilePaths[0])
-        val gameView = GameView(context, this)
+        gameView = GameView(context, this)
         EventManager.subscribe(gameView) //Make gameView reactive to the game events.
         container.addView(gameView)
-
-
     }
 }

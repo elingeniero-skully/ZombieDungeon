@@ -1,8 +1,6 @@
 package com.example.labyrinthe
 
 sealed class GameEvent {
-    class PlayerMoved(val x: Int, val y: Int) : GameEvent()
-
     /**
      * Event that triggers a MapUpdateEvent inside the Map class.
      */
@@ -21,4 +19,6 @@ sealed class GameEvent {
      * Event that triggers the door unlocking.
      */
     object BossKilledEvent: GameEvent()
+
+    object GameFinished: GameEvent()
 }

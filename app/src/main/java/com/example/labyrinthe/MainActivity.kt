@@ -5,7 +5,9 @@ import android.widget.Button
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), GameEventObserver {
+
+    lateinit var game: Game
 
     // When opening the app (=onCreate) the executed fun by default is showMainMenu()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +45,9 @@ class MainActivity : AppCompatActivity() {
 
         //GameView is created and managed in the Game object.
 
+        //Making the activity sensitive to Game events
+        EventManager.subscribe(this)
+
         // Linking buttons
         findViewById<Button>(R.id.btnUp).setOnClickListener {
             EventManager.notify(GameEvent.PlayerMoveRequest("up"))
@@ -74,6 +79,12 @@ class MainActivity : AppCompatActivity() {
         val backButton = findViewById<Button>(R.id.back_main_menu)
         backButton.setOnClickListener {
             showMainMenu()
+        }
+    }
+
+    override fun onGameEvent(event: GameEvent) {
+        if (event is GameEvent.GameFinished) {
+            showCredits()
         }
     }
 }

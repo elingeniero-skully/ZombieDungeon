@@ -12,7 +12,7 @@ object EventManager {
     }
 
     fun notify(event: GameEvent) {
-        for (observer in observers) {
+        for (observer in observers.toList()) {
             observer.onGameEvent(event)
         }
     }
