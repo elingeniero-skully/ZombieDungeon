@@ -41,27 +41,33 @@ class MainActivity : AppCompatActivity() {
         val game = Game(this)
         game.start()
         val gameView = GameView(this, game)
+
+        //Make gameView reactive to the game events.
+        EventManager.subscribe(gameView)
+
         container.addView(gameView)
 
         // Linking buttons
         findViewById<Button>(R.id.btnUp).setOnClickListener {
-            //gameView.moveForward()
+            EventManager.notify(GameEvent.PlayerMoveRequest("up"))
         }
         findViewById<Button>(R.id.btnDown).setOnClickListener {
-            //gameView.moveBackward()
+            EventManager.notify(GameEvent.PlayerMoveRequest("down"))
         }
         findViewById<Button>(R.id.btnLeft).setOnClickListener {
-            //gameView.rotateLeft()
+            EventManager.notify(GameEvent.PlayerMoveRequest("rotate left"))
         }
         findViewById<Button>(R.id.btnRight).setOnClickListener {
-            //gameView.rotateRight()
+            EventManager.notify(GameEvent.PlayerMoveRequest("rotate right"))
         }
 
         findViewById<Button>(R.id.btnShoot).setOnClickListener{
             //TODO: implement shoot method and link it to the corresponding button
+            //The behaviour will change depending on the active item in the inventory
         }
         findViewById<Button>(R.id.btnInventory).setOnClickListener{
             //TODO: make the inventory appear with the items shown
+            EventManager.notify(GameEvent.ShowInventory)
         }
 
     }

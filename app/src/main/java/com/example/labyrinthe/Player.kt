@@ -6,7 +6,7 @@ import android.graphics.Paint
 import android.graphics.Path
 import kotlin.math.*
 
-class Player(positionArg: Vector2D, inventory: List<Item>?): Entity(), UseKey, GameEventListener {
+class Player(positionArg: Vector2D, inventory: List<Item>?): Entity(), UseKey {
     override var position = positionArg
 
     companion object {
@@ -14,14 +14,6 @@ class Player(positionArg: Vector2D, inventory: List<Item>?): Entity(), UseKey, G
             color = Color.GREEN
             style = Paint.Style.STROKE
             strokeWidth = 2f
-        }
-    }
-
-    override fun onEvent(event: GameEvent, queue: EventQueue) {
-        when (event) {
-            is PlayerMovedEvent -> {
-                //Request a move to the map.
-            }
         }
     }
 }

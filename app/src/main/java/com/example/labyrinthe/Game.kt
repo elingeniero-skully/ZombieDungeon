@@ -2,7 +2,7 @@ package com.example.labyrinthe
 
 import android.content.Context
 
-class Game(private val context: Context) : GameEventListener {
+class Game(private val context: Context) : GameEventObserver {
     private val levelFilePaths = mutableListOf<String>()
     private var currentLevelIndex = 0
     lateinit var currentLevel: Level
@@ -12,11 +12,12 @@ class Game(private val context: Context) : GameEventListener {
         levelFilePaths.add("level1.json")
         levelFilePaths.add("level2.json")
         levelFilePaths.add("level3.json")
+        EventManager.subscribe(this)
     }
 
-    override fun onEvent(event: GameEvent, queue: EventQueue) {
+    override fun onGameEvent(event: GameEvent) {
         when (event) {
-            is LevelSucceedEvent -> {
+            is GameEvent.LevelSucceedEvent -> {
                 if (currentLevelIndex < (levelFilePaths.size - 1)) {
                     currentLevel.stop()
                     currentLevelIndex++
@@ -26,9 +27,12 @@ class Game(private val context: Context) : GameEventListener {
                 }
 
             }
-            is LevelFailedEvent -> {
+            is GameEvent.LevelFailedEvent -> {
                 currentLevel.stop()
                 //TODO : What happens when the level is failed ?
+            }
+            else -> {
+
             }
         }
     }

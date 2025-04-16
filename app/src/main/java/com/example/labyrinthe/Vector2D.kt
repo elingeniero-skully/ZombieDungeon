@@ -2,9 +2,30 @@ package com.example.labyrinthe
 import kotlin.math.*
 
 data class Vector2D(var x: Int, var y:Int) {
+
+    companion object {
+        /**
+         * Returns a direction vector from a sight direction
+         */
+        fun fromSightDirection(sightDirection: Int): Vector2D {
+            return when (sightDirection) {
+                0 -> Vector2D(1, 0)   // right
+                1 -> Vector2D(0, 1)   // down
+                2 -> Vector2D(-1, 0)  // left
+                3 -> Vector2D(0, -1)  // up
+                else -> Vector2D(0, 0)
+            }
+        }
+    }
+
     /** Allows to do a + b. */
     operator fun plus(other: Vector2D): Vector2D {
         return Vector2D(this.x + other.x, this.y + other.y)
+    }
+
+    /** Allows to do a - b. */
+    operator fun minus(other: Vector2D): Vector2D {
+        return Vector2D(this.x - other.x, this.y - other.y)
     }
 
     /** Returns a new vector with only the sign. Ex : (-4,5) => (-1,1).

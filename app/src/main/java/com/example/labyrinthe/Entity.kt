@@ -11,6 +11,28 @@ abstract class Entity: GameObject(), Drawable {
     var sightDirection = 0
 
     /**
+     * Movement methods.
+     */
+
+    fun moveForward() {
+        //This method should be called AFTER the collision check.
+        position += Vector2D.fromSightDirection(sightDirection)
+    }
+
+    fun moveBackward() {
+        //This method should be called AFTER the collision check.
+        position -= Vector2D.fromSightDirection(sightDirection)
+    }
+
+    fun rotateRight() {
+        sightDirection = (sightDirection + 1) % 4
+    }
+
+    fun rotateLeft() {
+        sightDirection = (sightDirection + 3) % 4
+    }
+
+    /**
      * Defines how to draw an entity on the map. Used by GameView.
      * The method currently draws a triangle. The color of this triangle will vary depending on the entity.
      */

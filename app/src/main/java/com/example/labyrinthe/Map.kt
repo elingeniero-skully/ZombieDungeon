@@ -7,7 +7,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 
-class Map(context: Context, fileNameInAssets: String) {
+class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
     val maxSize: Vector2D //Maximum size of the map (will be initialized in the init block)
     val objectsOnTheMap = mutableListOf<GameObject>() //Only Entity or Wall : they are drawable and have a position.
 
@@ -16,18 +16,52 @@ class Map(context: Context, fileNameInAssets: String) {
      * For now, errors are not handled.
      */
     init {
-        //1) Parse the map file
-        //val jsonString = File(filePath).readText()
+        //Parse the map file
         val jsonString = loadLevelFromAssets(context, fileNameInAssets)
         val mapData: MapData = Json.decodeFromString<MapData>(jsonString)
 
-        //2) Retrieve the map size. The empty cases are simply not represented for performance purposes.
+        //Retrieve the map size. The empty cases are simply not represented for performance purposes.
         maxSize = Vector2D(mapData.width, mapData.height)
 
-        //3) Unpack into objectsOnTheMap
+        //Unpack into objectsOnTheMap
         for (case in mapData.cases) {
             val parser = JsonParserFactory.getParser(case.type)
             objectsOnTheMap.add(parser.parse(case) as GameObject) //Polymorphism in action !
+        }
+    }
+
+    override fun onGameEvent(event: GameEvent) {
+        when (event) {
+            is GameEvent.PlayerMoveRequest -> {
+                val player = getPlayerObject() //Retrieve the player object on the map.
+
+                when(event.direction) {
+                    "rotate left" -> {
+                        player.rotateLeft()
+                        EventManager.notify(GameEvent.RenderEvent)
+                    }
+                    "rotate right" -> {
+                        player.rotateRight()
+                        EventManager.notify(GameEvent.RenderEvent)
+                    }
+                    "up" -> {
+                        //Collision check in the sight direction.
+                        if (checkCollisionForward(player.position, Vector2D.fromSightDirection(player.sightDirection)) == null) {
+                            player.moveForward()
+                            EventManager.notify(GameEvent.RenderEvent)
+                        }
+                    }
+                    "down" -> {
+                        //Collision check in the sight direction.
+                        if (checkCollisionBackward(player.position, Vector2D.fromSightDirection(player.sightDirection)) == null) {
+                            player.moveBackward()
+                            EventManager.notify(GameEvent.RenderEvent)
+                        }
+                    }
+                }
+            }
+
+            else -> {}
         }
     }
 
@@ -74,9 +108,25 @@ class Map(context: Context, fileNameInAssets: String) {
     }
 
     /**
-     * Checks if there's something next to a specified position, in a certain direction.
+     * Checks surrounding position collision.
      */
-    fun checkNextCollision(startingPosition: Vector2D, rawDirection: Vector2D): GameObject? {
-        return getElementByPosition(startingPosition + rawDirection.keepSignOnly())
+    fun checkCollisionForward(startingPosition: Vector2D, rawDirection: Vector2D): GameObject? {
+        //Check for out of bounds
+        val newPosition = startingPosition + rawDirection.keepSignOnly()
+        if (newPosition.x < maxSize.x && newPosition.x >= 0 && newPosition.y < maxSize.y && newPosition.y >= 0) {
+            return getElementByPosition(newPosition)
+        }
+
+        return Wall(newPosition) //A trick, the Wall will NOT be added to the map.
+    }
+
+    fun checkCollisionBackward(startingPosition: Vector2D, rawDirection: Vector2D): GameObject? {
+        //Check for out of bounds
+        val newPosition = startingPosition - rawDirection.keepSignOnly()
+        if (newPosition.x < maxSize.x && newPosition.x >= 0 && newPosition.y < maxSize.y && newPosition.y >= 0) {
+            return getElementByPosition(newPosition)
+        }
+
+        return Wall(newPosition)
     }
 }

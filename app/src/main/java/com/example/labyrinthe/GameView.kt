@@ -5,7 +5,7 @@ import android.graphics.*
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import kotlin.math.*
-class GameView(context: Context, private val game: Game) : SurfaceView(context), SurfaceHolder.Callback {
+class GameView(context: Context, private val game: Game) : SurfaceView(context), SurfaceHolder.Callback, GameEventObserver {
     private val gridDimensions: Vector2D = game.currentLevel.map.maxSize
     private val player: Player = game.currentLevel.map.getPlayerObject()
     private var tileSize = 0
@@ -26,6 +26,15 @@ class GameView(context: Context, private val game: Game) : SurfaceView(context),
 
     override fun surfaceDestroyed(holder: SurfaceHolder) {}
 
+    override fun onGameEvent(event: GameEvent) {
+        if (event is GameEvent.RenderEvent) {
+            render()
+        }
+    }
+
+    /**
+     * Rendering method : updates content on the screen.
+     */
     fun render() {
         val canvas = holder.lockCanvas()
         canvas?.let {
