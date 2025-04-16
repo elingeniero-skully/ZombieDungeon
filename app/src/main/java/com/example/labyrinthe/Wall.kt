@@ -1,8 +1,13 @@
 package com.example.labyrinthe
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.decodeFromJsonElement
+import android.graphics.Color
+import android.graphics.Paint
+
 open class Wall(positionArg: Vector2D): GameObject(), Drawable {
     override var position = positionArg
+    override var paint = Paint().apply{
+        color = Color.LTGRAY
+        style = Paint.Style.STROKE
+        strokeWidth = 2f
+    }
 }

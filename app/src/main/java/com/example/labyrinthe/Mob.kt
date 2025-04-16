@@ -1,9 +1,7 @@
 package com.example.labyrinthe
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.decodeFromJsonElement
-
+import android.graphics.Color
+import android.graphics.Paint
 /**
  * @param movementPattern Movement algorithm the Mob will use (default is RandomMovementPattern).
  */
@@ -11,6 +9,12 @@ import kotlinx.serialization.json.decodeFromJsonElement
 //TODO Include item in the constructor AND IN THE MOB STRUCTURE PROPERLY !!
 open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomMovementPattern(), inventory: List<Item>?): Entity() {
     override var position = positionArg
+
+    override var paint = Paint().apply{
+        color = Color.LTGRAY
+        style = Paint.Style.STROKE
+        strokeWidth = 2f
+    }
 
     /**
      * IMPLEMENTATION OF THE STRATEGY PATTERN

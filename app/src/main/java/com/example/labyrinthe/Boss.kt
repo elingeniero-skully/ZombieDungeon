@@ -1,12 +1,16 @@
 package com.example.labyrinthe
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.decodeFromJsonElement
+import android.graphics.Color
+import android.graphics.Paint
 
 class Boss(position: Vector2D, movementPattern: MovementPattern = RandomMovementPattern(), inventory: List<Item>?):
     Mob(position, movementPattern, inventory) {
 
+    override var paint = Paint().apply{
+        color = Color.LTGRAY
+        style = Paint.Style.STROKE
+        strokeWidth = 2f
+    }
 
 }
 
