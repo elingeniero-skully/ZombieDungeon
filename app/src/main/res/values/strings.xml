@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Labyrinthe</string>
+    <string name="dev_elie">Elie Hassid</string>
+    <string name="dev_doha">Doha Zbaidi</string>
+    <string name="dev_gabriel">Gabriel Slanina</string>
+    <string name="dev_melanie">Melanie Kizil</string>
 </resources>
