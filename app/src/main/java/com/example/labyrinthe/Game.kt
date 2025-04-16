@@ -5,7 +5,7 @@ import android.content.Context
 class Game(private val context: Context) : GameEventListener {
     private val levelFilePaths = mutableListOf<String>()
     private var currentLevelIndex = 0
-    private lateinit var currentLevel: Level
+    lateinit var currentLevel: Level
 
     init {
         //Retrieve files from assets.

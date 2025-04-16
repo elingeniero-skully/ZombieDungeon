@@ -8,9 +8,8 @@ open class Wall(positionArg: Vector2D): GameObject(), Drawable {
 
     companion object {
         var paint = Paint().apply{
-            color = Color.LTGRAY
-            style = Paint.Style.STROKE
-            strokeWidth = 2f
+            color = Color.GRAY
+            style = Paint.Style.FILL
         }
     }
 }

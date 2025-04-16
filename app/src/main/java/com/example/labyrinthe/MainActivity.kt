@@ -2,6 +2,7 @@ package com.example.labyrinthe
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -36,8 +37,33 @@ class MainActivity : AppCompatActivity() {
         // Here you can initialize your game engine or elements
         // e.g. startGameLoop(), initPlayer(), etc.
 
+        val container = findViewById<FrameLayout>(R.id.gameMapContainer)
         val game = Game(this)
         game.start()
+        val gameView = GameView(this, game)
+        container.addView(gameView)
+
+        // Linking buttons
+        findViewById<Button>(R.id.btnUp).setOnClickListener {
+            //gameView.moveForward()
+        }
+        findViewById<Button>(R.id.btnDown).setOnClickListener {
+            //gameView.moveBackward()
+        }
+        findViewById<Button>(R.id.btnLeft).setOnClickListener {
+            //gameView.rotateLeft()
+        }
+        findViewById<Button>(R.id.btnRight).setOnClickListener {
+            //gameView.rotateRight()
+        }
+
+        findViewById<Button>(R.id.btnShoot).setOnClickListener{
+            //TODO: implement shoot method and link it to the corresponding button
+        }
+        findViewById<Button>(R.id.btnInventory).setOnClickListener{
+            //TODO: make the inventory appear with the items shown
+        }
+
     }
 
     private fun showCredits() {

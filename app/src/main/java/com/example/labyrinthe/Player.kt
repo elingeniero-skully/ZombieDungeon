@@ -11,7 +11,7 @@ class Player(positionArg: Vector2D, inventory: List<Item>?): Entity(), UseKey, G
 
     companion object {
         val paint = Paint().apply{
-            color = Color.LTGRAY
+            color = Color.GREEN
             style = Paint.Style.STROKE
             strokeWidth = 2f
         }

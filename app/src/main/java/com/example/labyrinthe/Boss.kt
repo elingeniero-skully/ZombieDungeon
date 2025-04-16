@@ -8,7 +8,7 @@ class Boss(position: Vector2D, movementPattern: MovementPattern = RandomMovement
 
     companion object {
         val paint = Paint().apply{
-            color = Color.LTGRAY
+            color = Color.YELLOW
             style = Paint.Style.STROKE
             strokeWidth = 2f
         }

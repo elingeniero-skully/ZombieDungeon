@@ -12,7 +12,7 @@ open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomM
 
     companion object{
         val paint = Paint().apply{
-            color = Color.LTGRAY
+            color = Color.RED
             style = Paint.Style.STROKE
             strokeWidth = 2f
         }
