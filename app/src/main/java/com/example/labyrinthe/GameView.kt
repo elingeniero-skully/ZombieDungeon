@@ -6,8 +6,8 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import kotlin.math.*
 class GameView(context: Context, private val game: Game) : SurfaceView(context), SurfaceHolder.Callback, GameEventObserver {
-    private val gridDimensions: Vector2D = game.currentLevel.map.maxSize
-    private val player: Player = game.currentLevel.map.findObjectOfType<Player>()
+    private val gridDimensions: Vector2D = game.map.maxSize
+    private val player: Player = game.map.findObjectOfType<Player>()
     private var tileSize = 0
 
     init {
@@ -48,7 +48,7 @@ class GameView(context: Context, private val game: Game) : SurfaceView(context),
                     val right = left + tileSize
                     val bottom = top + tileSize
 
-                    val objectAtPosition = game.currentLevel.map.getElementByPosition(Vector2D(x,y)) //GameObject at current position
+                    val objectAtPosition = game.map.getElementByPosition(Vector2D(x,y)) //GameObject at current position
 
                     //Paint the tile itself
                     it.drawRect(
