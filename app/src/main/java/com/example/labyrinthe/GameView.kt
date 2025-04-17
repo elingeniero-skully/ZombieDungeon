@@ -8,7 +8,6 @@ import android.view.SurfaceView
 import kotlin.math.*
 class GameView(context: Context, private val game: Game) : SurfaceView(context), SurfaceHolder.Callback, GameEventObserver {
     private val gridDimensions: Vector2D = game.map.maxSize
-    private val player: Player = game.map.findObjectOfType<Player>()
     private var tileSize = 0
 
     init {

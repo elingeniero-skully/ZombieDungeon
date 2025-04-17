@@ -9,6 +9,7 @@ import kotlin.math.*
 class Player(positionArg: Vector2D, inventoryArg: MutableList<Item>): Entity(), UseKey {
     override var position = positionArg
     override var inventory: MutableList<Item> = inventoryArg
+    var activeItem: Int = 0
 
     companion object {
         val paint = Paint().apply{
@@ -16,5 +17,12 @@ class Player(positionArg: Vector2D, inventoryArg: MutableList<Item>): Entity(), 
             style = Paint.Style.STROKE
             strokeWidth = 2f
         }
+    }
+
+    /**
+     * Selects the next item in the inventory
+     */
+    fun switchItem() {
+        activeItem = (activeItem + 1) % inventory.size
     }
 }

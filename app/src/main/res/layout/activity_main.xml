@@ -12,15 +12,8 @@
         android:id="@+id/gameMapContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3.5"
+        android:layout_weight="4"
         android:background="#242282" />
-
-    <FrameLayout
-        android:id="@+id/inventoryContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:background="@color/white" />
 
     <!-- Controls / Stats (1/4 of screen) -->
     <LinearLayout
@@ -127,6 +120,50 @@
                 android:layout_marginLeft="20dp"
                 android:textStyle="bold"
                 android:text="100/100"
+                android:drawableStart="@drawable/baseline_arrow_right_24"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="18sp" />
+
+            <!-- Health TextView -->
+            <TextView
+                android:id="@+id/currentWeaponTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Weapon"
+                android:textStyle="bold"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/currentWeaponTypeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:text="Weapon type"
+                android:drawableStart="@drawable/baseline_arrow_right_24"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/currentWeaponNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:text="Weapon name"
+                android:drawableStart="@drawable/baseline_arrow_right_24"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/currentWeaponDamageTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:text="Per hit : -10 hp"
                 android:drawableStart="@drawable/baseline_arrow_right_24"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="18sp" />

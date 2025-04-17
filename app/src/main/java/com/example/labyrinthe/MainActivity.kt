@@ -3,6 +3,7 @@ package com.example.labyrinthe
 import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity(), GameEventObserver {
@@ -40,16 +41,17 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
         // e.g. startGameLoop(), initPlayer(), etc.
 
         val container = findViewById<FrameLayout>(R.id.gameMapContainer)
-        val inventoryContainer = findViewById<FrameLayout>(R.id.inventoryContainer)
 
-        val game = Game(this, container, inventoryContainer)
-
-        game.start()
-
-        //GameView is created and managed in the Game object.
+        game = Game(this, container)
 
         //Making the activity sensitive to Game events
         EventManager.subscribe(this)
+
+        game.start()
+
+        refreshInventory()
+
+        //GameView is created and managed in the Game object.
 
         // Linking buttons
         findViewById<Button>(R.id.btnUp).setOnClickListener {
@@ -66,12 +68,12 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
         }
 
         findViewById<Button>(R.id.btnShoot).setOnClickListener{
-            //TODO: implement shoot method and link it to the corresponding button
-            //The behaviour will change depending on the active item in the inventory
+            EventManager.notify(GameEvent.ShootEvent)
         }
 
         findViewById<Button>(R.id.btnSwitchActiveItem).setOnClickListener{
-            EventManager.notify(GameEvent.SwitchActiveItemEvent)
+            game.map.player.switchItem()
+            refreshInventory()
         }
     }
 
@@ -87,6 +89,21 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
     override fun onGameEvent(event: GameEvent) {
         if (event is GameEvent.GameFinished) {
             showCredits()
+        } else if (event is GameEvent.UpdateHealthEvent) {
+            findViewById<TextView>(R.id.healthValueTv).setText(game.map.player.health.toString())
+        }
+    }
+
+    fun refreshInventory() {
+        val activeItem: Item = game.map.player.inventory[game.map.player.activeItem]
+        if (activeItem is Gun) {
+            findViewById<TextView>(R.id.currentWeaponTypeTv).setText("Gun")
+            findViewById<TextView>(R.id.currentWeaponNameTv).setText(activeItem.name)
+            findViewById<TextView>(R.id.currentWeaponDamageTv).setText((activeItem.damage).toString())
+        } else if (activeItem is Knife) {
+            findViewById<TextView>(R.id.currentWeaponTypeTv).setText("Knife")
+            findViewById<TextView>(R.id.currentWeaponNameTv).setText(activeItem.name)
+            findViewById<TextView>(R.id.currentWeaponDamageTv).setText((activeItem.damage).toString())
         }
     }
 }

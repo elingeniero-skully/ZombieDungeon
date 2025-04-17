@@ -10,6 +10,7 @@ import kotlinx.serialization.json.JsonObject
 class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
     val maxSize: Vector2D //Maximum size of the map (will be initialized in the init block)
     val objectsOnTheMap = mutableListOf<GameObject>() //Only Entity or Wall : they are drawable and have a position.
+    var player: Player
 
     /**
      * Builds the map from the input file filePath.
@@ -28,13 +29,13 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
             val parser = JsonParserFactory.getParser(case.type)
             objectsOnTheMap.add(parser.parse(case) as GameObject) //Polymorphism in action !
         }
+
+        player = findObjectOfType<Player>()
     }
 
     override fun onGameEvent(event: GameEvent) {
         when (event) {
             is GameEvent.PlayerMoveRequest -> {
-                val player = findObjectOfType<Player>() //Retrieve the player object on the map.
-
                 when(event.direction) {
                     "rotate left" -> {
                         player.rotateLeft()
@@ -69,6 +70,7 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
                     }
                 }
             }
+
             is GameEvent.BossKilledEvent -> {
                 val door = findObjectOfType<Door>()
                 door.unlocked = true

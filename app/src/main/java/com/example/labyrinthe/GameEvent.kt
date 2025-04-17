@@ -23,4 +23,14 @@ sealed class GameEvent {
     object GameFinished: GameEvent()
 
     object SwitchActiveItemEvent : GameEvent()
+
+    /**
+     * Event called whenever the user clicks on the Shoot button.
+     */
+    object ShootEvent: GameEvent()
+
+    /**
+     * Event called whenever Player's health has to be updated on the screen
+     */
+    object UpdateHealthEvent: GameEvent()
 }
