@@ -1,8 +1,5 @@
 package com.example.labyrinthe
 
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.decodeFromJsonElement
-
 /**
  * The JsonParser lets each class provide its way of parsing data from a .json file.
  */

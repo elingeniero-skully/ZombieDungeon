@@ -2,7 +2,6 @@ package com.example.labyrinthe
 
 import android.content.Context
 import android.widget.FrameLayout
-import kotlinx.coroutines.delay
 
 class Game(private val context: Context, private val container: FrameLayout) : GameEventObserver {
     private val levelFilePaths = mutableListOf<String>()

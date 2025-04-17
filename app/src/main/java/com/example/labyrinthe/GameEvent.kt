@@ -1,5 +1,4 @@
 package com.example.labyrinthe
-
 sealed class GameEvent {
     object LevelSucceedEvent : GameEvent()
     object LevelFailedEvent : GameEvent()

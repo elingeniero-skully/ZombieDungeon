@@ -2,7 +2,6 @@ package com.example.labyrinthe
 
 import android.content.Context
 import android.graphics.*
-import android.util.Log
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import kotlin.math.*

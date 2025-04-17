@@ -1,12 +1,6 @@
 package com.example.labyrinthe
-import java.io.File
-import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 import android.content.Context
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonNull
-import kotlinx.serialization.json.JsonObject
-
 class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
     val maxSize: Vector2D //Maximum size of the map (will be initialized in the init block)
     val objectsOnTheMap = mutableListOf<GameObject>() //Only Entity or Wall : they are drawable and have a position.
