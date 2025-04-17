@@ -9,14 +9,12 @@ import kotlinx.serialization.json.decodeFromJsonElement
 class BossJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Boss {
         val structure = Json.decodeFromJsonElement<MobJsonStructure>(mapCase.details)
-        var movementPattern: Mob.MovementPattern = Mob.RandomMovementPattern()
+        var movementPattern: MovementPattern = RandomMovementPattern()
         val inventory = mutableListOf<Item>()
 
         when (structure.movementPattern) {
-            "random"   -> movementPattern = Mob.RandomMovementPattern()
-            "follow"   -> movementPattern = Mob.FollowPlayerPattern()
-            "line"     -> movementPattern = Mob.LineMovementPattern()
-            "circular" -> movementPattern = Mob.CircularMovementPattern()
+            "random"   -> movementPattern = RandomMovementPattern()
+            "follow"   -> movementPattern = FollowPlayerPattern()
         }
 
         //Adding weapons to the inventory

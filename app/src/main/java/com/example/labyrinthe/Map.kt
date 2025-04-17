@@ -11,6 +11,7 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
     val maxSize: Vector2D //Maximum size of the map (will be initialized in the init block)
     val objectsOnTheMap = mutableListOf<GameObject>() //Only Entity or Wall : they are drawable and have a position.
     var player: Player
+    var mobs = listOf<Mob>()
 
     /**
      * Builds the map from the input file filePath.
@@ -31,46 +32,12 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
         }
 
         player = findObjectOfType<Player>()
+        mobs = findObjectsOfType<Mob>()
+
     }
 
     override fun onGameEvent(event: GameEvent) {
         when (event) {
-            is GameEvent.PlayerMoveRequest -> {
-                when(event.direction) {
-                    "rotate left" -> {
-                        player.rotateLeft()
-                        EventManager.notify(GameEvent.RenderEvent)
-                    }
-                    "rotate right" -> {
-                        player.rotateRight()
-                        EventManager.notify(GameEvent.RenderEvent)
-                    }
-                    "up" -> {
-                        //Collision check in the sight direction.
-                        val nextObject = checkCollisionForward(player.position, Vector2D.fromSightDirection(player.sightDirection))
-
-                        if (nextObject is Door && nextObject.unlocked) {
-                            EventManager.notify(GameEvent.LevelSucceedEvent)
-                        } else if (nextObject == null) {
-                            player.moveForward()
-                            EventManager.notify(GameEvent.RenderEvent)
-                        }
-                    }
-                    "down" -> {
-                        //Collision check in the sight direction.
-                        val nextObject = checkCollisionBackward(player.position, Vector2D.fromSightDirection(player.sightDirection))
-
-                        if (nextObject is Door && nextObject.unlocked) {
-                            EventManager.notify(GameEvent.LevelSucceedEvent)
-                        } else if (nextObject == null) {
-                            player.moveBackward()
-                            EventManager.notify(GameEvent.RenderEvent)
-                            EventManager.notify(GameEvent.BossKilledEvent)
-                        }
-                    }
-                }
-            }
-
             is GameEvent.BossKilledEvent -> {
                 val door = findObjectOfType<Door>()
                 door.unlocked = true
@@ -78,6 +45,113 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
             }
 
             else -> {}
+        }
+    }
+
+    fun movePlayer(direction: String) {
+        when(direction) {
+            "rotate left" -> {
+                player.rotateLeft()
+            }
+            "rotate right" -> {
+                player.rotateRight()
+            }
+            "up" -> {
+                //Collision check in the sight direction.
+                val nextObject = checkCollisionForward(player.position, Vector2D.fromSightDirection(player.sightDirection))
+                if (nextObject is Door && nextObject.unlocked) {
+                    EventManager.notify(GameEvent.LevelSucceedEvent)
+                } else if (nextObject == null) {
+                    player.moveForward()
+                }
+            }
+            "down" -> {
+                //Collision check in the sight direction.
+                val nextObject = checkCollisionBackward(player.position, Vector2D.fromSightDirection(player.sightDirection))
+
+                if (nextObject is Door && nextObject.unlocked) {
+                    EventManager.notify(GameEvent.LevelSucceedEvent)
+                } else if (nextObject == null) {
+                    player.moveBackward()
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Inflict damage to an entity. If the player is dead, the LevelFailedEvent is sent.
+     * If it is another entity, it is just removed from the map.
+     */
+    fun hurt(entity: Entity, amount: Int) {
+        if (entity.health - amount <= 0) {
+            entity.health = 0
+            if (entity is Player) {
+                EventManager.notify(GameEvent.LevelFailedEvent)
+            } else if (entity is Boss){
+                EventManager.notify(GameEvent.BossKilledEvent)
+            }
+            objectsOnTheMap.remove(entity)
+            mobs = findObjectsOfType<Mob>()
+        } else {
+            entity.health -= amount
+            if (entity is Player) {
+                EventManager.notify(GameEvent.UpdateHealthEvent)
+            }
+        }
+    }
+
+    fun playerAttack() {
+        val currentItem = (player.inventory[player.activeItem] as Weapon)
+
+        val direction = when(player.sightDirection) {
+            0 -> Vector2D(1,0)
+            1 -> Vector2D(0,1)
+            2 -> Vector2D(-1,0)
+            3 -> Vector2D(0,-1)
+            else -> Vector2D(0,0)
+        }
+
+        if (currentItem is Gun) {
+            //Inline collision
+            val collisionObject = checkInlineCollision(player.position, direction)
+            if (collisionObject is Mob) {
+                hurt(collisionObject, currentItem.damage)
+                println("Player infliced ${currentItem.damage} to mob using ${currentItem.name}")
+            }
+        } else if (currentItem is Knife) {
+            val collisionObject = checkCollisionForward(player.position, direction)
+            if (collisionObject is Mob) {
+                hurt(collisionObject, currentItem.damage)
+                println("Player infliced ${currentItem.damage} to mob using ${currentItem.name}")
+            }
+        }
+
+    }
+
+    fun moveMob(mob: Mob, direction: String) {
+        when(direction) {
+            "rotate left" -> {
+                mob.rotateLeft()
+            }
+            "rotate right" -> {
+                mob.rotateRight()
+            }
+            "up" -> {
+                //Collision check in the sight direction.
+                val nextObject = checkCollisionForward(mob.position, Vector2D.fromSightDirection(mob.sightDirection))
+                if (nextObject == null) {
+                    mob.moveForward()
+                }
+            }
+            "down" -> {
+                //Collision check from the back.
+                val nextObject = checkCollisionBackward(mob.position, Vector2D.fromSightDirection(mob.sightDirection))
+                if (nextObject == null) {
+                    mob.moveBackward()
+                }
+
+            }
         }
     }
 
@@ -97,6 +171,13 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
      */
     fun getElementByPosition(position: Vector2D): GameObject? {
         return objectsOnTheMap.find { it is Drawable && it.position == position }
+    }
+
+    /**
+     * Returns all instances of specified type from the objectsOnTheMap.
+     */
+    inline fun <reified T : GameObject> findObjectsOfType(): List<T> {
+        return objectsOnTheMap.filterIsInstance<T>()
     }
 
     /**

@@ -42,6 +42,16 @@ data class Vector2D(var x: Int, var y:Int) {
         y = (y.toDouble() / norm).toInt()
     }
 
+    /** Norm of the vector. **/
+    fun norm(): Int {
+        return sqrt(x.toDouble().pow(2) + y.toDouble().pow(2)).roundToInt()
+    }
+
+    /** Ceil norm of the vector. **/
+    fun normCeil(): Int {
+        return ceil(sqrt(x.toDouble().pow(2) + y.toDouble().pow(2))).toInt()
+    }
+
     /** Rotates the vector by a certain angle in degrees represented by an Int. */
     fun rotate(angleInDegrees: Int) {
         val angleInRads = angleInDegrees * PI/180
@@ -54,5 +64,10 @@ data class Vector2D(var x: Int, var y:Int) {
     /** Returns the maximum value between the x and y coordinates. */
     fun maxOf(): Int {
         return maxOf(x,y)
+    }
+
+    /** Returns the maximum value between the x and y coordinates in absolute value. */
+    fun maxOfAbs(): Int {
+        return maxOf(abs(x),abs(y))
     }
 }

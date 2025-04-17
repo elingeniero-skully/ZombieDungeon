@@ -4,7 +4,7 @@
   "cases":[
     {"x" : 0, "y" : 0, "type" : "WALL", "details" : {}},
     {"x" : 1, "y" : 0, "type" : "DOOR", "details" : {}},
-    {"x" : 0, "y" : 3, "type" : "PLAYER", "details" : {
+    {"x" : 4, "y" : 3, "type" : "PLAYER", "details" : {
       "weapons" : [
       {"type" : "GUN", "name" : "FN Scar", "damage" : 75},
       {"type" : "KNIFE", "name" : "Couteau de Kebab", "damage" : 25}
@@ -20,7 +20,7 @@
     {"x" : 1, "y" : 4, "type" : "MOB", "details" : {
       "movementPattern" : "follow",
       "weapons" : [
-        {"type" : "GUN", "name" : "FN Five-Seven", "damage" : 50}
+        {"type" : "GUN", "name" : "FN Five-Seven", "damage" : 10}
       ]
     }}
   ]

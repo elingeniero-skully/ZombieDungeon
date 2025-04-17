@@ -49,9 +49,6 @@ class GameView(context: Context, private val game: Game) : SurfaceView(context),
                     val right = left + tileSize
                     val bottom = top + tileSize
 
-                    Log.d("GameView", "Drawing tile at ($left, $top), ($right, $bottom)")
-                    Log.d("GameView", "InventoryView dimensions: width = $width, height = $height")
-
                     val objectAtPosition = game.map.getElementByPosition(Vector2D(x,y)) //GameObject at current position
 
                     //Paint the tile itself

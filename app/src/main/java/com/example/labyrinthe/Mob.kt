@@ -2,13 +2,13 @@ package com.example.labyrinthe
 
 import android.graphics.Color
 import android.graphics.Paint
+
 /**
  * @param movementPattern Movement algorithm the Mob will use (default is RandomMovementPattern).
  */
-
-//TODO Include item in the constructor AND IN THE MOB STRUCTURE PROPERLY !!
-open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomMovementPattern(), inventory: List<Item>?): Entity() {
+open class Mob(positionArg: Vector2D, val movementPattern: MovementPattern = RandomMovementPattern(), inventoryArg: MutableList<Item>): Entity() {
     override var position = positionArg
+    override var inventory = inventoryArg
 
     companion object{
         val paint = Paint().apply{
@@ -19,47 +19,9 @@ open class Mob(positionArg: Vector2D, movementPattern: MovementPattern = RandomM
     }
 
     /**
-     * IMPLEMENTATION OF THE STRATEGY PATTERN
-     * The Movement Patterns define the Mob's logic : how it moves and when it attacks.
+     * Method that update the mob status at each call to tick()
      */
-    interface MovementPattern {
-        fun move() //Moves and attacks.
-    }
-
-    /**
-     * Defines the random movement pattern
-     */
-    class RandomMovementPattern : MovementPattern {
-        override fun move() {
-            TODO("Not yet implemented")
-        }
-    }
-
-    /**
-     * Follows the Player by using an observer.
-     * With an observer.
-     */
-    class FollowPlayerPattern : MovementPattern {
-        override fun move() {
-            TODO("Not yet implemented")
-        }
-    }
-
-    /**
-     * Defines the circular movement pattern
-     */
-    class CircularMovementPattern : MovementPattern {
-        override fun move() {
-            TODO("Not yet implemented")
-        }
-    }
-
-    /**
-     * Defines the line movement pattern
-     */
-    class LineMovementPattern : MovementPattern {
-        override fun move() {
-            TODO("Not yet implemented")
-        }
+    fun update(map: Map) {
+        movementPattern.behave(this, map)
     }
 }
