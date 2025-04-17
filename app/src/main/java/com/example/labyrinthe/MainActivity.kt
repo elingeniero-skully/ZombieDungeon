@@ -55,19 +55,19 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
 
         // Linking buttons
         findViewById<Button>(R.id.btnUp).setOnClickListener {
-            game.map.movePlayer("up")
+            game.map.move(game.map.player, "up")
             EventManager.notify(GameEvent.RenderEvent)
         }
         findViewById<Button>(R.id.btnDown).setOnClickListener {
-            game.map.movePlayer("down")
+            game.map.move(game.map.player, "down")
             EventManager.notify(GameEvent.RenderEvent)
         }
         findViewById<Button>(R.id.btnLeft).setOnClickListener {
-            game.map.movePlayer("rotate left")
+            game.map.move(game.map.player, "rotate left")
             EventManager.notify(GameEvent.RenderEvent)
         }
         findViewById<Button>(R.id.btnRight).setOnClickListener {
-            game.map.movePlayer("rotate right")
+            game.map.move(game.map.player, "rotate right")
             EventManager.notify(GameEvent.RenderEvent)
         }
 

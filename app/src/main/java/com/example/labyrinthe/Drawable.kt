@@ -9,8 +9,4 @@ import android.graphics.Paint
 interface Drawable {
     var position: Vector2D //Position of the drawable object.
 
-    /**
-     * Draw method of the class on the map.
-     */
-    //fun draw(canvas: Canvas, tileSize: Int) Arguments may vary...
 }

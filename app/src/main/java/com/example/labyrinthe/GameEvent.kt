@@ -1,11 +1,6 @@
 package com.example.labyrinthe
 
 sealed class GameEvent {
-    /**
-     * Event that triggers a MapUpdateEvent inside the Map class.
-     */
-    class PlayerMoveRequest(val direction: String): GameEvent()
-    object ShowInventory : GameEvent()
     object LevelSucceedEvent : GameEvent()
     object LevelFailedEvent : GameEvent()
 
@@ -21,13 +16,6 @@ sealed class GameEvent {
     object BossKilledEvent: GameEvent()
 
     object GameFinished: GameEvent()
-
-    object SwitchActiveItemEvent : GameEvent()
-
-    /**
-     * Event called whenever the user clicks on the Shoot button.
-     */
-    object ShootEvent: GameEvent()
 
     /**
      * Event called whenever Player's health has to be updated on the screen

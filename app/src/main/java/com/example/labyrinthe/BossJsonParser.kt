@@ -4,7 +4,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
 
 /**
- * Parser of the Boss class. Mob structure is suitable to store the Json data of the Boss class.
+ * Parser of the Boss class.
+ * Mob structure is suitable to store the Json data of the Boss class.
  */
 class BossJsonParser() : JsonParser() {
     override fun parse(mapCase: MapCase): Boss {

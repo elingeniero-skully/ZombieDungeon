@@ -2,9 +2,11 @@ package com.example.labyrinthe
 
 import kotlinx.coroutines.*
 
+/**
+ * The game loop is necessary in order to interact with the mobs.
+ */
 class GameLoop(val game: Game) {
     private var job: Job? = null
-
     fun start() {
         job = CoroutineScope(Dispatchers.Default).launch {
             while (isActive) {

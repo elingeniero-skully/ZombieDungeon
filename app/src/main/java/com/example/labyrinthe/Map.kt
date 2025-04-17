@@ -48,36 +48,40 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
         }
     }
 
-    fun movePlayer(direction: String) {
+    fun move(entity: Entity, direction: String) {
         when(direction) {
-            "rotate left" -> {
-                player.rotateLeft()
-            }
-            "rotate right" -> {
-                player.rotateRight()
-            }
+            "rotate left" -> entity.rotateLeft()
+            "rotate right" -> entity.rotateRight()
             "up" -> {
                 //Collision check in the sight direction.
-                val nextObject = checkCollisionForward(player.position, Vector2D.fromSightDirection(player.sightDirection))
-                if (nextObject is Door && nextObject.unlocked) {
-                    EventManager.notify(GameEvent.LevelSucceedEvent)
-                } else if (nextObject == null) {
-                    player.moveForward()
+                val nextObject = checkCollisionForward(entity.position, Vector2D.fromSightDirection(entity.sightDirection))
+
+                if (entity is Player) {
+                    if (nextObject is Door && nextObject.unlocked) {
+                        EventManager.notify(GameEvent.LevelSucceedEvent)
+                    }
+                }
+
+                if (nextObject == null) {
+                    entity.moveForward()
                 }
             }
             "down" -> {
                 //Collision check in the sight direction.
-                val nextObject = checkCollisionBackward(player.position, Vector2D.fromSightDirection(player.sightDirection))
+                val nextObject = checkCollisionBackward(entity.position, Vector2D.fromSightDirection(entity.sightDirection))
 
-                if (nextObject is Door && nextObject.unlocked) {
-                    EventManager.notify(GameEvent.LevelSucceedEvent)
-                } else if (nextObject == null) {
-                    player.moveBackward()
+                if (entity is Player) {
+                    if (nextObject is Door && nextObject.unlocked) {
+                        EventManager.notify(GameEvent.LevelSucceedEvent)
+                    }
+                }
+
+                if (nextObject == null) {
+                    entity.moveBackward()
                 }
             }
         }
     }
-
 
     /**
      * Inflict damage to an entity. If the player is dead, the LevelFailedEvent is sent.
@@ -127,32 +131,6 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
             }
         }
 
-    }
-
-    fun moveMob(mob: Mob, direction: String) {
-        when(direction) {
-            "rotate left" -> {
-                mob.rotateLeft()
-            }
-            "rotate right" -> {
-                mob.rotateRight()
-            }
-            "up" -> {
-                //Collision check in the sight direction.
-                val nextObject = checkCollisionForward(mob.position, Vector2D.fromSightDirection(mob.sightDirection))
-                if (nextObject == null) {
-                    mob.moveForward()
-                }
-            }
-            "down" -> {
-                //Collision check from the back.
-                val nextObject = checkCollisionBackward(mob.position, Vector2D.fromSightDirection(mob.sightDirection))
-                if (nextObject == null) {
-                    mob.moveBackward()
-                }
-
-            }
-        }
     }
 
     /**

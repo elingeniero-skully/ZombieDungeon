@@ -39,12 +39,10 @@ class FollowPlayerPattern : MovementPattern {
         }
 
         if (distanceToPlayerVect.normCeil() > 1) {
-            map.moveMob(mob, "up")
+            map.move(mob, "up")
         } else {
             map.hurt(map.player, (mob.inventory.first() as Weapon).damage)
             println("Mob infliced ${(mob.inventory.first() as Weapon).damage} to Player using ${(mob.inventory.first() as Weapon).name}")
         }
-
-
     }
 }
