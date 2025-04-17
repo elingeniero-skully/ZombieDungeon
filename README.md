@@ -10,7 +10,7 @@ Projet réalisé dans le cadre d’un travail scolaire à l’**École Polytechn
 - 🌍 **Exploration libre** sur une map personnalisable.
 - ⚔️ **Combat dynamique** : utilisez un **Gun** (attaque à distance) ou un **Knife** (corps-à-corps).
 - 👾 **Mobs & Boss** : éliminez les ennemis, battez le boss pour ouvrir la porte du niveau suivant.
-- 🎒 **Inventaire intégré** : récupérez et changez d’armes à tout moment.
+- 🎒 **Inventaire intégré** : Changez d’arme à tout moment.
 - 🧱 **Système de cartes JSON** : les maps sont générées automatiquement à partir de fichiers `.json`, ce qui permet une création ultra-simple de nouveaux niveaux.
 
 ---
