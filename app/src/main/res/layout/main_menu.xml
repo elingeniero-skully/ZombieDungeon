@@ -4,62 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CE0000"
+    android:background="@drawable/background_menu"
     tools:context=".MainActivity">
 
-    <!-- Main Title -->
-    <TextView
-        android:id="@+id/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="ZombieDungeon 2D"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textStyle="bold|italic"
-
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/StartGame"
-        app:layout_constraintVertical_chainStyle="packed"
-
-        android:layout_marginBottom="32dp" />
+    <!-- Titre en image -->
 
     <!-- Start Game Button -->
+
+    <ImageView
+        android:id="@+id/titleImage"
+        android:layout_width="356dp"
+        android:layout_height="291dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/title_image"
+        android:src="@drawable/logo_title"
+        app:layout_constraintBottom_toTopOf="@+id/StartGame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintWidth_percent="0.8" />
+
     <Button
         android:id="@+id/StartGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:text="Start Game"
         android:textAllCaps="true"
         android:textColorLink="#9C27B0"
         android:textStyle="bold"
-
-        app:layout_constraintTop_toBottomOf="@+id/Title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/Credits"
-
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Credits Button -->
     <Button
         android:id="@+id/Credits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_marginBottom="64dp"
         android:text="Credits"
         android:textAllCaps="true"
         android:textStyle="bold"
-
-        app:layout_constraintTop_toBottomOf="@+id/StartGame"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
-        android:layout_marginBottom="32dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

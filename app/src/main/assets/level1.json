@@ -3,21 +3,35 @@
   "height":8,
   "cases":[
     {"x" : 0, "y" : 0, "type" : "WALL", "details" : {}},
+    {"x" : 2, "y" : 0, "type" : "WALL", "details" : {}},
+    {"x" : 0, "y" : 1, "type" : "WALL", "details" : {}},
+    {"x" : 2, "y" : 1, "type" : "WALL", "details" : {}},
     {"x" : 1, "y" : 0, "type" : "DOOR", "details" : {}},
+    {"x" : 0, "y" : 4, "type" : "WALL", "details" : {}},
+    {"x" : 1, "y" : 4, "type" : "WALL", "details" : {}},
+    {"x" : 2, "y" : 4, "type" : "WALL", "details" : {}},
+    {"x" : 3, "y" : 4, "type" : "WALL", "details" : {}},
+    {"x" : 4, "y" : 4, "type" : "WALL", "details" : {}},
+    {"x" : 4, "y" : 5, "type" : "WALL", "details" : {}},
     {"x" : 4, "y" : 3, "type" : "PLAYER", "details" : {
       "weapons" : [
       {"type" : "GUN", "name" : "FN Scar", "damage" : 75},
       {"type" : "KNIFE", "name" : "Couteau de Kebab", "damage" : 25}
     ]
     }},
-    {"x" : 0, "y" : 4, "type" : "WALL", "details" : {}},
-    {"x" : 0, "y" : 2, "type" : "BOSS", "details" : {
+    {"x" : 0, "y" : 3, "type" : "BOSS", "details" : {
       "movementPattern" : "random",
       "weapons" : [
         {"type" : "GUN", "name" : "FN Five-Seven", "damage" : 50}
       ]
     }},
-    {"x" : 1, "y" : 4, "type" : "MOB", "details" : {
+    {"x" : 1, "y" : 3, "type" : "MOB", "details" : {
+      "movementPattern" : "follow",
+      "weapons" : [
+        {"type" : "GUN", "name" : "FN Five-Seven", "damage" : 10}
+      ]
+    }},
+    {"x" : 6, "y" : 5, "type" : "MOB", "details" : {
       "movementPattern" : "follow",
       "weapons" : [
         {"type" : "GUN", "name" : "FN Five-Seven", "damage" : 10}

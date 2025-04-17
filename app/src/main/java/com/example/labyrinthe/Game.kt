@@ -14,6 +14,7 @@ class Game(private val context: Context, private val container: FrameLayout) : G
         //Retrieve files from assets.
         levelFilePaths.add("level1.json")
         levelFilePaths.add("level2.json")
+        levelFilePaths.add("level3.json")
         EventManager.subscribe(this)
     }
 

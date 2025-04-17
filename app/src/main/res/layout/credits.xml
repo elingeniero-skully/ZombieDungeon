@@ -11,9 +11,11 @@
         android:id="@+id/dev1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/dev_elie"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/dev2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/devs_credits" />
 
@@ -21,9 +23,11 @@
         android:id="@+id/dev2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/dev_doha"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/dev3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dev1" />
 
@@ -31,9 +35,11 @@
         android:id="@+id/dev3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/dev_gabriel"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/dev4"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dev2" />
 
@@ -41,9 +47,10 @@
         android:id="@+id/dev4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
+        android:layout_marginTop="5dp"
         android:text="@string/dev_melanie"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dev3" />
 
@@ -64,11 +71,14 @@
         android:id="@+id/devs_credits"
         android:layout_width="60dp"
         android:layout_height="19dp"
-        android:layout_marginStart="19dp"
         android:layout_marginTop="34dp"
+        android:layout_marginBottom="10dp"
         android:text="Devs"
+        android:textAlignment="center"
         android:textAllCaps="true"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/dev1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/back_main_menu" />
 
