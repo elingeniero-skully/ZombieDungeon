@@ -5,10 +5,18 @@ import android.graphics.Paint
 import android.graphics.Path
 import kotlin.math.*
 
-abstract class Entity: GameObject(), Drawable {
+abstract class Entity(override var position: Vector2D, val inventory: MutableList<Item>): GameObject(), Drawable {
+
     var health = 100
-    open var inventory = mutableListOf<Item>()
     var sightDirection = 0
+    var activeItem: Int = 0
+
+    /**
+     * Selects the next item in the inventory
+     */
+    fun switchItem() {
+        activeItem = (activeItem + 1) % inventory.size
+    }
 
     /**
      * Movement methods.

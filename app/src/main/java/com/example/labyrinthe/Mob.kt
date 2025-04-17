@@ -6,10 +6,7 @@ import android.graphics.Paint
 /**
  * @param movementPattern Movement algorithm the Mob will use (default is RandomMovementPattern).
  */
-open class Mob(positionArg: Vector2D, val movementPattern: MovementPattern = RandomMovementPattern(), inventoryArg: MutableList<Item>): Entity() {
-    override var position = positionArg
-    override var inventory = inventoryArg
-
+open class Mob(position: Vector2D, val movementPattern: MovementPattern = RandomMovementPattern(), inventory: MutableList<Item>): Entity(position,inventory) {
     companion object{
         val paint = Paint().apply{
             color = Color.RED
