@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
 
             val quitButton = findViewById<Button>(R.id.quitButton)
             quitButton.setOnClickListener {
-                this.finish() //Leave the app
+                this.finishAffinity() //Leave the app
             }
 
         } else if (event is GameEvent.UpdateHealthEvent) {
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
 
             val quitButton = findViewById<Button>(R.id.quitButtonFail)
             quitButton.setOnClickListener {
-                this.finish() //Leave the app
+                this.finishAffinity() //Leave the app
             }
         }
     }
