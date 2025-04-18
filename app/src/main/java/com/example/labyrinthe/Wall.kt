@@ -3,9 +3,7 @@ package com.example.labyrinthe
 import android.graphics.Color
 import android.graphics.Paint
 
-open class Wall(positionArg: Vector2D): GameObject(), Drawable {
-    override var position = positionArg
-
+open class Wall(override var position: Vector2D): GameObject(), Drawable {
     companion object {
         var paint = Paint().apply{
             color = Color.GRAY

@@ -42,6 +42,9 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
         }
     }
 
+    /**
+     * Moves an entity on the map.
+     */
     fun move(entity: Entity, direction: String) {
         when(direction) {
             "rotate left" -> entity.rotateLeft()
