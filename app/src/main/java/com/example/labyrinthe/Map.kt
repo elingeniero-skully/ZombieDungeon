@@ -28,8 +28,6 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
         player = findObjectOfType<Player>()
         mobs = findObjectsOfType<Mob>()
 
-        println("Player health : ${player.health}")
-
     }
 
     override fun onGameEvent(event: GameEvent) {
@@ -98,7 +96,6 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
             entity.health -= amount
             if (entity is Player) {
                 EventManager.notify(GameEvent.UpdateHealthEvent(entity.health))
-                println("Player ${entity.hashCode()} prend $amount dégâts ! (HP avant : ${entity.health})")
             }
         }
     }
@@ -119,13 +116,11 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
             val collisionObject = checkInlineCollision(player.position, direction)
             if (collisionObject is Mob) {
                 hurt(collisionObject, currentItem.damage)
-                println("Player inflicted ${currentItem.damage} to mob using ${currentItem.name}")
             }
         } else if (currentItem is Knife) {
             val collisionObject = checkCollisionForward(player.position, direction)
             if (collisionObject is Mob) {
                 hurt(collisionObject, currentItem.damage)
-                println("Player inflicted ${currentItem.damage} to mob using ${currentItem.name}")
             }
         }
 

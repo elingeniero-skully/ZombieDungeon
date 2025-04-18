@@ -41,7 +41,6 @@ class FollowPlayerPattern : MovementPattern {
             map.move(mob, "up")
         } else {
             map.hurt(map.player, (mob.inventory.first() as Weapon).damage)
-            println("Mob inflicted ${(mob.inventory.first() as Weapon).damage} to Player using ${(mob.inventory.first() as Weapon).name}")
         }
     }
 }

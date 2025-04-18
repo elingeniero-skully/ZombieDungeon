@@ -11,7 +11,6 @@ class GameView(context: Context, private val map: Map) : SurfaceView(context), S
 
     init {
         holder.addCallback(this)
-        println("GameView created with map size: ${map.maxSize}")
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {

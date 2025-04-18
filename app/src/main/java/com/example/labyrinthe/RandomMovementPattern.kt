@@ -53,7 +53,6 @@ class RandomMovementPattern : MovementPattern {
 
             //Attack the player.
             map.hurt(map.player, (mob.inventory.first() as Weapon).damage)
-            println("Mob infliced ${(mob.inventory.first() as Weapon).damage} to Player using ${(mob.inventory.first() as Weapon).name}")
         }
     }
 }
