@@ -28,6 +28,8 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
         player = findObjectOfType<Player>()
         mobs = findObjectsOfType<Mob>()
 
+        println("Player health : ${player.health}")
+
     }
 
     override fun onGameEvent(event: GameEvent) {
@@ -79,6 +81,7 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
 
     /**
      * Inflict damage to an entity. If the player is dead, the LevelFailedEvent is sent.
+     * If it is Mob, the BossKilledEvent is sent.
      * If it is another entity, it is just removed from the map.
      */
     fun hurt(entity: Entity, amount: Int) {
@@ -94,7 +97,7 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
         } else {
             entity.health -= amount
             if (entity is Player) {
-                EventManager.notify(GameEvent.UpdateHealthEvent)
+                EventManager.notify(GameEvent.UpdateHealthEvent(entity.health))
             }
         }
     }
@@ -115,13 +118,13 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
             val collisionObject = checkInlineCollision(player.position, direction)
             if (collisionObject is Mob) {
                 hurt(collisionObject, currentItem.damage)
-                println("Player infliced ${currentItem.damage} to mob using ${currentItem.name}")
+                println("Player inflicted ${currentItem.damage} to mob using ${currentItem.name}")
             }
         } else if (currentItem is Knife) {
             val collisionObject = checkCollisionForward(player.position, direction)
             if (collisionObject is Mob) {
                 hurt(collisionObject, currentItem.damage)
-                println("Player infliced ${currentItem.damage} to mob using ${currentItem.name}")
+                println("Player inflicted ${currentItem.damage} to mob using ${currentItem.name}")
             }
         }
 

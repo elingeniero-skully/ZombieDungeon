@@ -5,18 +5,30 @@ import kotlinx.coroutines.*
 /**
  * The game loop is necessary in order to interact with the mobs.
  */
-class GameLoop(val game: Game) {
+class GameLoop(val map: Map, val gameView: GameView) {
     private var job: Job? = null
     fun start() {
         job = CoroutineScope(Dispatchers.Default).launch {
             while (isActive) {
                 withContext(Dispatchers.Main) {
-                    game.tick() // Update game logic
+                    tick() // Update game logic
                 }
 
                 delay(1700L) // how many iterations per second ?
             }
         }
+    }
+
+    /**
+     * Main game loop.
+     */
+    fun tick() {
+        //Update the mobs
+        for (mob in map.mobs) {
+            mob.update(map)
+        }
+
+        gameView.render()
     }
 
     fun stop() {

@@ -19,5 +19,5 @@ sealed class GameEvent {
     /**
      * Event called whenever Player's health has to be updated on the screen
      */
-    object UpdateHealthEvent: GameEvent()
+    class UpdateHealthEvent(val health: Int): GameEvent()
 }

@@ -5,13 +5,13 @@ import android.graphics.*
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import kotlin.math.*
-class GameView(context: Context, private val game: Game) : SurfaceView(context), SurfaceHolder.Callback, GameEventObserver {
-    private val gridDimensions: Vector2D = game.map.maxSize
+class GameView(context: Context, private val map: Map) : SurfaceView(context), SurfaceHolder.Callback, GameEventObserver {
+    private val gridDimensions: Vector2D = map.maxSize
     private var tileSize = 0
 
     init {
         holder.addCallback(this)
-        println("GameView created with map size: ${game.map.maxSize}")
+        println("GameView created with map size: ${map.maxSize}")
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {
@@ -48,7 +48,7 @@ class GameView(context: Context, private val game: Game) : SurfaceView(context),
                     val right = left + tileSize
                     val bottom = top + tileSize
 
-                    val objectAtPosition = game.map.getElementByPosition(Vector2D(x,y)) //GameObject at current position
+                    val objectAtPosition = map.getElementByPosition(Vector2D(x,y)) //GameObject at current position
 
                     //Paint the tile itself
                     it.drawRect(

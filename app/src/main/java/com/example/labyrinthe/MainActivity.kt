@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity(), GameEventObserver {
 
-    lateinit var game: Game
-
     // When opening the app (=onCreate) the executed fun by default is showMainMenu()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +19,7 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
         //Sets the content on screen to be the .xml file specified inside brackets
         setContentView(R.layout.main_menu)
 
-        // Findng the buttons on the main menu's layout
+        // Finding the buttons on the main menu's layout
         val startGameButton = findViewById<Button>(R.id.StartGame)
         val creditsButton = findViewById<Button>(R.id.Credits)
 
@@ -42,14 +40,14 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
 
         val container = findViewById<FrameLayout>(R.id.gameMapContainer)
 
-        game = Game(this, container)
+        val game = Game(this, container)
 
         //Making the activity sensitive to Game events
         EventManager.subscribe(this)
 
         game.start()
 
-        refreshInventory()
+        refreshInventory(game.map.player.inventory[game.map.player.activeItem])
 
         //GameView is created and managed in the Game object.
 
@@ -77,7 +75,7 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
 
         findViewById<Button>(R.id.btnSwitchActiveItem).setOnClickListener{
             game.map.player.switchItem()
-            refreshInventory()
+            refreshInventory(game.map.player.inventory[game.map.player.activeItem])
         }
     }
 
@@ -94,20 +92,19 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
         if (event is GameEvent.GameFinished) {
             showCredits()
         } else if (event is GameEvent.UpdateHealthEvent) {
-            findViewById<TextView>(R.id.healthValueTv).setText(game.map.player.health.toString())
+            findViewById<TextView>(R.id.healthValueTv).text = event.health.toString()
         }
     }
 
-    fun refreshInventory() {
-        val activeItem: Item = game.map.player.inventory[game.map.player.activeItem]
+    fun refreshInventory(activeItem: Item) {
         if (activeItem is Gun) {
-            findViewById<TextView>(R.id.currentWeaponTypeTv).setText("Gun")
-            findViewById<TextView>(R.id.currentWeaponNameTv).setText(activeItem.name)
-            findViewById<TextView>(R.id.currentWeaponDamageTv).setText((activeItem.damage).toString())
+            findViewById<TextView>(R.id.currentWeaponTypeTv).text = "Gun"
+            findViewById<TextView>(R.id.currentWeaponNameTv).text = activeItem.name
+            findViewById<TextView>(R.id.currentWeaponDamageTv).text = (activeItem.damage).toString()
         } else if (activeItem is Knife) {
-            findViewById<TextView>(R.id.currentWeaponTypeTv).setText("Knife")
-            findViewById<TextView>(R.id.currentWeaponNameTv).setText(activeItem.name)
-            findViewById<TextView>(R.id.currentWeaponDamageTv).setText((activeItem.damage).toString())
+            findViewById<TextView>(R.id.currentWeaponTypeTv).text = "Knife"
+            findViewById<TextView>(R.id.currentWeaponNameTv).text = activeItem.name
+            findViewById<TextView>(R.id.currentWeaponDamageTv).text = (activeItem.damage).toString()
         }
     }
 }

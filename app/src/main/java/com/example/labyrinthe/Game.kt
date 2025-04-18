@@ -18,87 +18,106 @@ class Game(private val context: Context, private val container: FrameLayout) : G
         EventManager.subscribe(this)
     }
 
-    /**
-     * Main game loop.
-     */
-    fun tick() {
-        //Update the mobs
-        for (mob in map.mobs) {
-            mob.update(map)
-        }
-
-        gameView.render()
-    }
-
     override fun onGameEvent(event: GameEvent) {
         when (event) {
             is GameEvent.LevelSucceedEvent -> {
+                //Is there a level after ?
                 if (currentLevelIndex < (levelFilePaths.size - 1)) {
+                    //Stop the game loop
                     gameLoop.stop()
-                    unloadMap()
+
+                    //"Unload" the map
+                    EventManager.unsubscribe(map)
+
+                    //"Unload" the old gameView
+                    EventManager.unsubscribe(gameView)
+
+                    //Remove the old gameView
+                    container.removeAllViews()
+
                     currentLevelIndex++
-                    loadMap(levelFilePaths[currentLevelIndex])
-                    updateView()
+
+                    //Load the next map
+                    map = Map(context, levelFilePaths[currentLevelIndex])
+
+                    //Begin a new gameView
+                    gameView = GameView(context, map)
+                    container.addView(gameView)
+
+                    //Initialize a new game loop
+                    gameLoop = GameLoop(map, gameView)
+
+                    //Make the map and the gameView reactive to game events.
+                    EventManager.subscribe(gameView)
+                    EventManager.subscribe(map)
+
+                    EventManager.notify(GameEvent.UpdateHealthEvent(100))
+
+                    //Maybe a NEW gameLoop
                     gameLoop.start()
+
+                //When the game is finished (success in this case)
                 } else {
-                    //When the game is finished (success in this case)
+                    //Stop the game loop
                     gameLoop.stop()
-                    unloadMap()
-                    currentLevelIndex = 0
+
+                    //Unload the map
+                    EventManager.unsubscribe(map)
+
+                    //Unload the old gameView
+                    EventManager.unsubscribe(gameView)
+
+                    //Remove the old gameView
+                    container.removeAllViews()
+
+                    println("Game finished !")
+
                     EventManager.notify(GameEvent.GameFinished)
                 }
 
             }
             is GameEvent.LevelFailedEvent -> {
+                //Stop the game loop
                 gameLoop.stop()
-                unloadMap()
+
+                //Unload the map
+                EventManager.unsubscribe(map)
+
+                //Unload the old gameView
                 EventManager.unsubscribe(gameView)
-                currentLevelIndex = 0
+
+                //Remove the old gameView
+                container.removeAllViews()
+
+                println("Level failed !")
+
                 EventManager.notify(GameEvent.GameFinished)
             }
             else -> {}
         }
     }
 
-    /**
-     * Updates the view
-     */
-    fun updateView() {
-        gameView = GameView(context, this)
-        EventManager.subscribe(gameView) //Make gameView reactive to the game events.
-        container.removeAllViews()
-        container.addView(gameView)
-    }
-
-    /**
-     * Loads a new map and subscribes it to the EventManager.
-     */
-    fun loadMap(filePath: String) {
-        map = Map(context, filePath)
-        EventManager.subscribe(map)
-    }
-
-    /**
-     * Unloads the map by unsubscribing to the EventManager.
-     */
-    fun unloadMap() {
-        EventManager.unsubscribe(map)
-    }
-
     fun start() {
-        //Start the first level.
-        loadMap(levelFilePaths[0])
 
-        gameView = GameView(context, this)
-        EventManager.subscribe(gameView) //Make gameView reactive to the game events.
+        currentLevelIndex = 0
+
+        //Load the first map
+        map = Map(context, levelFilePaths[0])
+
+        //Begin a new gameView
+        gameView = GameView(context, map)
         container.addView(gameView)
 
-        //Start the game main loop.
-        gameLoop = GameLoop(this)
-        gameLoop.start()
-    }
+        //Initialize a new game loop
+        gameLoop = GameLoop(map, gameView)
 
-    fun stop() {
-        gameLoop.stop()
+        //Make the map and the gameView reactive to game events.
+        EventManager.subscribe(gameView)
+        EventManager.subscribe(map)
+
+        EventManager.notify(GameEvent.UpdateHealthEvent(100))
+
+        //Maybe a NEW gameLoop
+        gameLoop.start()
     }
 }
