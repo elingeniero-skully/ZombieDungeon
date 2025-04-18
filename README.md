@@ -5,7 +5,7 @@ Projet réalisé dans le cadre d’un travail scolaire à l’**École Polytechn
 
 ---
 
-![Class Diagram](https://raw.githubusercontent.com/elingeniero-skully/ZombieDungeon/refs/heads/main/UML/class_diagram_final.png)
+![Class Diagram](https://raw.githubusercontent.com/elingeniero-skully/ZombieDungeon/refs/heads/main/UML/class_diagram.png)
 
 ---
 
