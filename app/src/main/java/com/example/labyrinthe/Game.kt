@@ -24,9 +24,6 @@ class Game(private val context: Context, private val container: FrameLayout) : G
                     //Stop the game loop
                     gameLoop.stop()
 
-                    //"Unload" the map
-                    EventManager.unsubscribe(map)
-
                     //"Unload" the old gameView
                     EventManager.unsubscribe(gameView)
 
@@ -47,7 +44,6 @@ class Game(private val context: Context, private val container: FrameLayout) : G
 
                     //Make the map and the gameView reactive to game events.
                     EventManager.subscribe(gameView)
-                    EventManager.subscribe(map)
 
                     EventManager.notify(GameEvent.UpdateHealthEvent(100))
 
@@ -58,9 +54,6 @@ class Game(private val context: Context, private val container: FrameLayout) : G
                 } else {
                     //Stop the game loop
                     gameLoop.stop()
-
-                    //Unload the map
-                    EventManager.unsubscribe(map)
 
                     //Unload the old gameView
                     EventManager.unsubscribe(gameView)
@@ -75,9 +68,6 @@ class Game(private val context: Context, private val container: FrameLayout) : G
             is GameEvent.LevelFailedEvent -> {
                 //Stop the game loop
                 gameLoop.stop()
-
-                //Unload the map
-                EventManager.unsubscribe(map)
 
                 //Unload the old gameView
                 EventManager.unsubscribe(gameView)
@@ -130,7 +120,6 @@ class Game(private val context: Context, private val container: FrameLayout) : G
 
         //Make the map and the gameView reactive to game events.
         EventManager.subscribe(gameView)
-        EventManager.subscribe(map)
 
         EventManager.notify(GameEvent.UpdateHealthEvent(100))
 
