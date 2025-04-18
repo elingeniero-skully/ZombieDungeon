@@ -30,18 +30,6 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
 
     }
 
-    override fun onGameEvent(event: GameEvent) {
-        when (event) {
-            is GameEvent.BossKilledEvent -> {
-                val door = findObjectOfType<Door>()
-                door.unlocked = true
-                EventManager.notify(GameEvent.RenderEvent)
-            }
-
-            else -> {}
-        }
-    }
-
     /**
      * Moves an entity on the map.
      */
@@ -91,7 +79,9 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
             if (entity is Player) {
                 EventManager.notify(GameEvent.LevelFailedEvent)
             } else if (entity is Boss){
-                EventManager.notify(GameEvent.BossKilledEvent)
+                val door = findObjectOfType<Door>()
+                door.unlocked = true
+                EventManager.notify(GameEvent.RenderEvent)
             }
             objectsOnTheMap.remove(entity)
             mobs = findObjectsOfType<Mob>()
