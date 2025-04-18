@@ -98,6 +98,7 @@ class Map(context: Context, fileNameInAssets: String) : GameEventObserver {
             entity.health -= amount
             if (entity is Player) {
                 EventManager.notify(GameEvent.UpdateHealthEvent(entity.health))
+                println("Player ${entity.hashCode()} prend $amount dégâts ! (HP avant : ${entity.health})")
             }
         }
     }

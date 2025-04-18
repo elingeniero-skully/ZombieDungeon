@@ -70,8 +70,6 @@ class Game(private val context: Context, private val container: FrameLayout) : G
                     //Remove the old gameView
                     container.removeAllViews()
 
-                    println("Game finished !")
-
                     EventManager.notify(GameEvent.GameFinished)
                 }
 
@@ -88,10 +86,6 @@ class Game(private val context: Context, private val container: FrameLayout) : G
 
                 //Remove the old gameView
                 container.removeAllViews()
-
-                println("Level failed !")
-
-                EventManager.notify(GameEvent.GameFinished)
             }
             else -> {}
         }

@@ -5,4 +5,7 @@
     <string name="dev_gabriel">Gabriel Slanina</string>
     <string name="dev_melanie">Melanie Kizil</string>
     <string name="title_image">ZombieDungeon 2D Title</string>
+    <string name="msg_game_finished">Congrats ! You have escaped from the Zombie Dungeon.</string>
+    <string name="quit_button">Exit</string>
+    <string name="fail_msg_tv">The Zombies killed you !</string>
 </resources>

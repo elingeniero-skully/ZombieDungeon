@@ -1,5 +1,6 @@
 package com.example.labyrinthe
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
@@ -90,9 +91,34 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
 
     override fun onGameEvent(event: GameEvent) {
         if (event is GameEvent.GameFinished) {
-            showCredits()
+            setContentView(R.layout.game_finished)
+
+            val assetFileDescriptor = this.resources.openRawResourceFd(R.raw.music)
+            val mediaPlayer = MediaPlayer()
+            mediaPlayer.setDataSource(
+                assetFileDescriptor.fileDescriptor,
+                assetFileDescriptor.startOffset,
+                assetFileDescriptor.length
+            )
+            assetFileDescriptor.close()
+            mediaPlayer.isLooping = true
+            mediaPlayer.prepare()
+            mediaPlayer.start()
+
+            val quitButton = findViewById<Button>(R.id.quitButton)
+            quitButton.setOnClickListener {
+                this.finish() //Leave the app
+            }
+
         } else if (event is GameEvent.UpdateHealthEvent) {
             findViewById<TextView>(R.id.healthValueTv).text = event.health.toString()
+        } else if (event is GameEvent.LevelFailedEvent) {
+            setContentView(R.layout.game_failed)
+
+            val quitButton = findViewById<Button>(R.id.quitButtonFail)
+            quitButton.setOnClickListener {
+                this.finish() //Leave the app
+            }
         }
     }
 
