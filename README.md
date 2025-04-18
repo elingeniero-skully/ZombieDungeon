@@ -5,6 +5,10 @@ Projet réalisé dans le cadre d’un travail scolaire à l’**École Polytechn
 
 ---
 
+![[Test Image 1]([3DTest.png](https://raw.githubusercontent.com/elingeniero-skully/ZombieDungeon/refs/heads/main/UML/class_diagram.png))](https://raw.githubusercontent.com/elingeniero-skully/ZombieDungeon/refs/heads/main/UML/class_diagram.png)
+
+--
+
 ## 🎮 Gameplay
 
 - 🌍 **Exploration libre** sur une map personnalisable.
