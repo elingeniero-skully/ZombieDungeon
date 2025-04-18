@@ -14,7 +14,11 @@ class GameLoop(val map: Map, val gameView: GameView) {
                     tick() // Update game logic
                 }
 
-                delay(1700L) // how many iterations per second ?
+                if(gameDifficultyMax) {
+                    delay(650L)
+                } else {
+                    delay(1500L) // how many iterations per second ?
+                }
             }
         }
     }

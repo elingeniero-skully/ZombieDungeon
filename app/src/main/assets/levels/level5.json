@@ -1,0 +1,58 @@
+{
+    "width": 8,
+    "height": 10,
+    "cases": [
+      {"x": 0, "y": 0, "type": "WALL", "details": {}},
+      {"x": 1, "y": 0, "type": "WALL", "details": {}},
+      {"x": 2, "y": 1, "type": "WALL", "details": {}},
+      {"x": 2, "y": 3, "type": "WALL", "details": {}},
+      {"x": 3, "y": 3, "type": "WALL", "details": {}},
+      {"x": 4, "y": 3, "type": "WALL", "details": {}},
+      {"x": 5, "y": 3, "type": "WALL", "details": {}},
+      {"x": 5, "y": 4, "type": "WALL", "details": {}},
+      {"x": 7, "y": 2, "type": "WALL", "details": {}},
+      
+      {"x": 6, "y": 7, "type": "DOOR", "details": {}}, 
+      
+      {"x": 2, "y": 6, "type": "PLAYER", "details": {
+        "weapons": [
+          {"type": "GUN", "name": "M16", "damage": 75},
+          {"type": "KNIFE", "name": "Couteau de Combat", "damage": 30}
+        ]
+      }},
+      
+      {"x": 4, "y": 5, "type": "MOB", "details": {
+        "movementPattern": "follow",
+        "weapons": [
+          {"type": "GUN", "name": "Glock 17", "damage": 20},
+          {"type": "KNIFE", "name": "Couteau de Chasse", "damage": 25}
+        ]
+      }},
+      
+      {"x": 3, "y": 7, "type": "MOB", "details": {
+        "movementPattern": "follow",
+        "weapons": [
+          {"type": "GUN", "name": "FN Five-Seven", "damage": 30},
+          {"type": "KNIFE", "name": "Couteau de Combat", "damage": 35}
+        ]
+      }},
+      
+      {"x": 6, "y": 3, "type": "MOB", "details": {
+        "movementPattern": "random",
+        "weapons": [
+          {"type": "GUN", "name": "Desert Eagle", "damage": 40},
+          {"type": "KNIFE", "name": "Couteau de Chasse", "damage": 45}
+        ]
+      }},
+      
+      {"x": 5, "y": 5, "type": "BOSS", "details": {
+        "movementPattern": "random",
+        "weapons": [
+          {"type": "GUN", "name": "AK-47", "damage": 80},
+          {"type": "GUN", "name": "M16", "damage": 75},
+          {"type": "KNIFE", "name": "Couteau de Combat", "damage": 50}
+        ]
+      }}
+    ]
+  }
+  

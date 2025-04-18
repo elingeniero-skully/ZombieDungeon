@@ -4,7 +4,7 @@ import android.content.Context
 import android.widget.FrameLayout
 
 class Game(private val context: Context, private val container: FrameLayout) : GameEventObserver {
-    private val levelFilePaths = mutableListOf<String>()
+    private val levelFilePaths: List<String>
     private var currentLevelIndex = 0
     lateinit var gameView: GameView
     lateinit var map: Map
@@ -12,9 +12,7 @@ class Game(private val context: Context, private val container: FrameLayout) : G
 
     init {
         //Retrieve files from assets.
-        levelFilePaths.add("level1.json")
-        levelFilePaths.add("level2.json")
-        levelFilePaths.add("level3.json")
+        levelFilePaths = getLevelFilePathsFromAssets(context)
         EventManager.subscribe(this)
     }
 
@@ -90,6 +88,31 @@ class Game(private val context: Context, private val container: FrameLayout) : G
             else -> {}
         }
     }
+
+
+    fun getLevelFilePathsFromAssets(context: Context): List<String> {
+        val levelFilePaths = mutableListOf<String>()
+
+        try {
+            val assetManager = context.assets
+
+            val files = assetManager.list("levels") // Search in the levels directory "assets/levels"
+
+            // Si the directory exists and contains files
+            if (files != null) {
+                for (file in files) {
+                    if (file.endsWith(".json")) {
+                        levelFilePaths.add("levels/$file")
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return levelFilePaths
+    }
+
 
     fun start() {
 

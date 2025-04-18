@@ -6,6 +6,10 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
+
+//The only global variable in the game !
+var gameDifficultyMax = false
 
 class MainActivity : AppCompatActivity(), GameEventObserver {
 
@@ -24,8 +28,11 @@ class MainActivity : AppCompatActivity(), GameEventObserver {
         val startGameButton = findViewById<Button>(R.id.StartGame)
         val creditsButton = findViewById<Button>(R.id.Credits)
 
+        val gameDifficulty = findViewById<SwitchCompat>(R.id.switch2)
+
         // Putting the buttons on listener to execute the function below when clicked
         startGameButton.setOnClickListener {
+            gameDifficultyMax = gameDifficulty.isChecked
             showGame()
         }
 

@@ -6,8 +6,8 @@
     {"x" : 1, "y" : 0, "type" : "DOOR", "details" : {}},
     {"x" : 0, "y" : 3, "type" : "PLAYER", "details" : {
       "weapons" : [
-      {"type" : "GUN", "name" : "FN Scar", "damage" : 75},
-      {"type" : "KNIFE", "name" : "Couteau de Kebab", "damage" : 25},
+      {"type" : "GUN", "name" : "AWP", "damage" : 100},
+      {"type" : "KNIFE", "name" : "Ciseaux usagés", "damage" : 25},
         {"type" : "GUN", "name" : "Beretta", "damage" : 35}
       ]
     }},
@@ -15,13 +15,13 @@
     {"x" : 0, "y" : 2, "type" : "BOSS", "details" : {
       "movementPattern" : "random",
       "weapons" : [
-        {"type" : "GUN", "name" : "FN Five-Seven", "damage" : 10}
+        {"type" : "GUN", "name" : "P90", "damage" : 10}
       ]
     }},
     {"x" : 1, "y" : 4, "type" : "MOB", "details" : {
       "movementPattern" : "follow",
       "weapons" : [
-        {"type" : "GUN", "name" : "FN Five-Seven", "damage" : 10}
+        {"type" : "GUN", "name" : "Colt M16", "damage" : 50}
       ]
     }}
   ]

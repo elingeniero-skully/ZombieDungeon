@@ -1,0 +1,57 @@
+{
+  "width": 8,
+  "height": 10,
+  "cases": [
+    {"x": 0, "y": 0, "type": "WALL", "details": {}},
+    {"x": 1, "y": 2, "type": "WALL", "details": {}},
+    {"x": 3, "y": 1, "type": "WALL", "details": {}},
+    {"x": 4, "y": 2, "type": "WALL", "details": {}},
+    {"x": 5, "y": 5, "type": "WALL", "details": {}},
+    {"x": 6, "y": 4, "type": "WALL", "details": {}},
+    {"x": 7, "y": 3, "type": "WALL", "details": {}},
+
+    {"x": 5, "y": 7, "type": "DOOR", "details": {}},
+
+    {"x": 2, "y": 5, "type": "PLAYER", "details": {
+      "weapons": [
+        {"type": "GUN", "name": "AK-47", "damage": 85},
+        {"type": "GUN", "name": "FN Five-Seven", "damage": 25},
+        {"type": "KNIFE", "name": "Couteau de Combat", "damage": 25},
+        {"type": "KNIFE", "name": "Couteau de Chasse", "damage": 35}
+      ]
+    }},
+
+    {"x": 4, "y": 4, "type": "MOB", "details": {
+      "movementPattern": "follow",
+      "weapons": [
+        {"type": "GUN", "name": "Glock 17", "damage": 15},
+        {"type": "KNIFE", "name": "Couteau de Chasse", "damage": 30}
+      ]
+    }},
+
+    {"x": 3, "y": 6, "type": "MOB", "details": {
+      "movementPattern": "follow",
+      "weapons": [
+        {"type": "GUN", "name": "Beretta 92", "damage": 20},
+        {"type": "KNIFE", "name": "Couteau de Combat", "damage": 25}
+      ]
+    }},
+
+    {"x": 6, "y": 2, "type": "MOB", "details": {
+      "movementPattern": "random",
+      "weapons": [
+        {"type": "GUN", "name": "Colt M1911", "damage": 30},
+        {"type": "KNIFE", "name": "Couteau de Chasse", "damage": 35}
+      ]
+    }},
+
+    {"x": 5, "y": 3, "type": "BOSS", "details": {
+      "movementPattern": "random",
+      "weapons": [
+        {"type": "GUN", "name": "Desert Eagle", "damage": 100},
+        {"type": "GUN", "name": "AK-47", "damage": 85},
+        {"type": "KNIFE", "name": "Couteau de Combat", "damage": 50}
+      ]
+    }}
+  ]
+}
